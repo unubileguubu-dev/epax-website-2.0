@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://epax.mn/</loc><priority>1.0</priority></url>
+  <url><loc>https://epax.mn/product</loc><priority>0.8</priority></url>
+  <url><loc>https://epax.mn/pricing</loc><priority>0.8</priority></url>
+  <url><loc>https://epax.mn/use-cases</loc><priority>0.7</priority></url>
+  <url><loc>https://epax.mn/download</loc><priority>0.7</priority></url>
+  <url><loc>https://epax.mn/blog</loc><priority>0.5</priority></url>
+</urlset>
