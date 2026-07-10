@@ -19,7 +19,7 @@ We also demonstrated our AI-assisted review workflow. Our system flags a new rev
 
 ## AI in Mongolian hospitality
 
-The highlight of the fair for us was the panel on AI in hospitality. Our technical advisor — the CEO of a Japanese AI technology company and an EPAX shareholder — joined the discussion and shared what Japan's service industry learned as it automated: technology should carry the busywork, and people should carry the hospitality. When software answers in seconds but a human decides what it says, guests get both speed and warmth. That principle is built into every EPAX process, and hearing it argued from twenty years of Japanese operations experience made it land differently.
+The highlight of the fair for us was the panel on AI in hospitality. Our technical advisor Amgalan Ganbat — CEO of a Tokyo-based AI technology company and an EPAX shareholder — joined the discussion and shared what Japan's service industry learned as it automated: technology should carry the busywork, and people should carry the hospitality. When software answers in seconds but a human decides what it says, guests get both speed and warmth. That principle is built into every EPAX process, and hearing it argued from twenty years of Japanese operations experience made it land differently.
 
 ## What comes next
 

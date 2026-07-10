@@ -15,7 +15,7 @@ EPAX exists to close that gap. We are a digital back office for Mongolian hotels
 
 ## The team behind it
 
-EPAX is built in Ulaanbaatar by a bilingual team that has worked on both sides of this problem — in Mongolian hospitality and in international tech. We also brought serious technical firepower on board: the chief executive of a Japanese AI technology company is an EPAX shareholder and an active advisor on our logistics and technical architecture. His experience automating service operations in Japan shapes a principle we apply every day: let AI carry the busywork, and let people carry the hospitality.
+EPAX is built in Ulaanbaatar by a bilingual team that has worked on both sides of this problem — in Mongolian hospitality and in international tech. We also brought serious technical firepower on board: Amgalan Ganbat, chief executive of an AI technology company in Tokyo, is an EPAX shareholder and an active advisor on our logistics and technical architecture. His experience automating service operations in Japan shapes a principle we apply every day: let AI carry the busywork, and let people carry the hospitality.
 
 That is why our AI drafts content and classifies inquiries in seconds, but a human editor with native-level English approves every word that reaches a guest. Speed from the machines, judgment from people.
 
