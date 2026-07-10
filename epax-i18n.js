@@ -302,6 +302,17 @@
   var lang = 'en';
   try { if (localStorage.getItem('epax-lang') === 'mn') lang = 'mn'; } catch (e) {}
 
+  /* typed headlines: let the typing animation type Mongolian natively.
+     The compiled typed-header component calls this hook (when present) right
+     before splitting its text into characters, so in MN mode the animation
+     types the Mongolian sentence directly instead of typing English and
+     swapping at the end. Returns null when no safe translation exists. */
+  window.__epaxTypedMN = function (txt) {
+    if (lang !== 'mn' || !txt) return null;
+    var out = MN[txt.replace(/\s+/g, ' ').trim()];
+    return (out && out.indexOf('<') === -1) ? out : null;
+  };
+
   function translateNode(node, dict) {
     var raw = node.nodeValue;
     var key = raw.trim();

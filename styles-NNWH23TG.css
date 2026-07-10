@@ -20,3 +20,7 @@ google-logo::after{content:"EPAX";font-family:'Google Sans Flex','Google Sans',s
 
 /* "Built for hospitality" video carousel removed from the landing page */
 use-cases{display:none!important}
+
+/* hero headline: no static flash before the typing animation starts —
+   hide the text until SplitText has split it into animatable chars */
+.typed-container.landing-main .typed-content{visibility:hidden}
