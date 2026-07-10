@@ -6,7 +6,7 @@ import { createRequire } from 'node:module';
 import { mkdirSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-const require = createRequire('/private/tmp/claude-501/-Users-uubiinoo-Desktop-antigravity-google/2c8d6cbe-3fe5-4607-bf26-297571236ac3/scratchpad/');
+const require = createRequire(import.meta.url);
 const puppeteer = require('puppeteer-core');
 
 const url = process.argv[2] || 'http://localhost:3000';

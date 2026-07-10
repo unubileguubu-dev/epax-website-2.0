@@ -52,8 +52,8 @@
     /* ---- who we serve (homepage) ---- */
     'Built for hospitality': 'Зочлох үйлчилгээнд зориулав',
     'for the tourist-first era': 'жуулчны эрин үед бүтээв',
-    "EPAX is Mongolia's digital back office for hotels, restaurants, and touring companies — bilingual in Mongolian and English, priced at less than one part-time hire, month-to-month with no lock-in.":
-      'EPAX бол Монголын зочид буудал, ресторан, тур компаниудын дижитал ар алба — монгол, англи хоёр хэлтэй, хагас цагийн нэг ажилтнаас ч хямд, сар бүрийн сунгалттай, урт гэрээгээр хүлдэггүй.',
+    "EPAX is Mongolia's digital back office for hotels, restaurants, and touring companies — bilingual in Mongolian and English, priced from less than a part-time hire, month-to-month with no lock-in.":
+      'EPAX бол Монголын зочид буудал, ресторан, тур компаниудын дижитал ар алба — монгол, англи хоёр хэлтэй, үнэ нь хагас цагийн нэг ажилтнаас ч хямдаас эхэлдэг, сар бүрийн сунгалттай, урт гэрээгээр хүлдэггүй.',
     'Hotels & Resorts': 'Зочид буудал ба резорт',
     "The average hotel in Mongolia runs at 30% occupancy. The gap to 60% isn't a product problem — it's a visibility problem. We fix it.":
       'Монголын зочид буудлын дундаж дүүргэлт ердөө 30%. 60% хүрэх зөрүү нь бүтээгдэхүүний биш — танигдах байдлын асуудал. Бид үүнийг шийднэ.',
@@ -113,13 +113,14 @@
     'Best value': 'Хамгийн ашигтай',
     'Full service': 'Бүрэн үйлчилгээ',
     'New!': 'Шинэ!',
-    '$200 first month': 'эхний сар $200',
-    '$350/month': 'сард $350',
-    '$500/month': 'сард $500',
-    'from $150/month': 'сард $150-аас',
-    'See what EPAX does for your visibility in the first four weeks': 'Эхний дөрвөн долоо хоногт EPAX таны танигдах байдлыг хэрхэн өөрчилдгийг хараарай',
+    /* prices convert to MNT at 1$ = 3,650₮ when MN is selected */
+    '$200/month': 'сард 730,000₮',
+    '$400/month': 'сард 1,460,000₮',
+    '$600/month': 'сард 2,190,000₮',
+    'from $150/month': 'сард 547,500₮-аас',
+    'Get found — your platforms set up, optimized, and kept fresh in English': 'Таныг олддог болгоно — платформуудыг тань англи хэлээр бүрэн тохируулж, байнга шинэлэг байлгана',
     'Everything a hotel needs to get found and booked by foreign tourists': 'Гадаад жуулчдад олдож, захиалга авахад зочид буудалд хэрэгтэй бүхэн',
-    'Your complete digital back office — less than one part-time hire': 'Таны бүрэн дижитал ар алба — хагас цагийн нэг ажилтнаас ч хямд',
+    'Your complete digital back office — still less than one full-time hire': 'Таны бүрэн дижитал ар алба — бүтэн цагийн нэг ажилтнаас ч хямд',
     'Tailored plans for restaurants, cafés, and touring companies — month-to-month, no lock-in': 'Ресторан, кафе, тур компанид тохирсон багцууд — сар бүрийн сунгалттай, урт гэрээгүй',
     'Get started': 'Эхлэх',
     'Plan includes:': 'Багцад багтана:',
@@ -127,17 +128,19 @@
     'Everything in Growth and:': 'Өсөлт багцын бүх зүйл, дээр нь:',
     'Now Available:': 'Одоо боломжтой:',
     '3-platform setup — Google Maps, TripAdvisor, Booking.com': '3 платформын тохиргоо — Google Maps, TripAdvisor, Booking.com',
-    '4 weeks of English content': '4 долоо хоногийн англи контент',
+    'Weekly English social content': 'Долоо хоног бүр англи хэлт сошиал контент',
     'Monthly report': 'Сарын тайлан',
     'Guest communication handled in English': 'Англи хэлээр зочидтой харилцана',
     'Review management': 'Сэтгэгдлийн менежмент',
     'Monthly growth report': 'Сарын өсөлтийн тайлан',
-    'Save $250+/mo vs. hiring in-house': 'Ажилтан авахаас сард $250+ хэмнэнэ',
+    'Save $250+/mo vs. an in-house English-speaking hire': 'Англи хэлтэй ажилтан авахаас сард 912,500₮+ хэмнэнэ',
     'E-invoice processing': 'И-баримт боловсруулалт',
     'Priority response': 'Тэргүүн ээлжийн хариу',
     'Dedicated account lead': 'Хариуцсан менежертэй',
-    'Restaurants from $150/month': 'Ресторан — сард $150-аас',
-    'Touring companies from $250/month': 'Тур компани — сард $250-аас',
+    'Quarterly strategy session': 'Улирал бүр стратегийн уулзалт',
+    'Restaurants from $150/month': 'Ресторан — сард 547,500₮-аас',
+    'Touring companies from $300/month': 'Тур компани — сард 1,095,000₮-аас',
+    'Off-season pause — pay only for months you operate': 'Улирлын завсарлага — зөвхөн ажиллаж буй саруудаа төлнө',
     'The EPAX guarantee: month one fails, month two is free': 'EPAX баталгаа: эхний сар үр дүнгүй бол дараагийн сар үнэгүй',
 
     /* ---- free audit page ---- */
@@ -179,9 +182,9 @@
     'We keep your Google Maps, TripAdvisor, and Instagram presence fresh in English, answer inquiries fast, and turn good meals into great reviews.':
       'Бид таны Google Maps, TripAdvisor, Instagram дахь орон зайг англи хэлээр шинэлэг байлгаж, лавлагаанд шуурхай хариулж, сайхан хоолыг гайхалтай сэтгэгдэл болгодог.',
     'One missed booking is $3,000–$6,000 gone. We handle platform presence, inquiry responses, and reviews so your calendar fills itself.':
-      'Нэг алдсан захиалга гэдэг $3,000–6,000 алга болно гэсэн үг. Платформ дээрх байр суурь, лавлагааны хариулт, сэтгэгдлийг бид хариуцаж, таны хуанли өөрөө дүүрнэ.',
-    'Optimized profiles on Google Maps, TripAdvisor, and Booking.com, weekly English content, and guest communications handled — priced at less than one part-time hire.':
-      'Google Maps, TripAdvisor, Booking.com дээрх оновчилсон профайл, долоо хоног бүрийн англи контент, зочидтой харилцах бүх ажил — хагас цагийн нэг ажилтнаас ч хямд үнээр.',
+      'Нэг алдсан захиалга гэдэг 10.9–21.9 сая ₮ алга болно гэсэн үг. Платформ дээрх байр суурь, лавлагааны хариулт, сэтгэгдлийг бид хариуцаж, таны хуанли өөрөө дүүрнэ.',
+    'Optimized profiles on Google Maps, TripAdvisor, and Booking.com, weekly English content, and guest communications handled — priced from less than a part-time hire.':
+      'Google Maps, TripAdvisor, Booking.com дээрх оновчилсон профайл, долоо хоног бүрийн англи контент, зочидтой харилцах бүх ажил — хагас цагийн нэг ажилтнаас ч хямд үнээс эхэлдэг.',
     'Photos updated weekly, reviews answered in English, and booking inquiries handled within hours — while you focus on your guests.':
       'Долоо хоног бүр шинэчлэгдэх зураг, англи хэлээр хариулах сэтгэгдэл, хэдхэн цагт шийдэгдэх захиалгын лавлагаа — та зочдодоо л анхаарлаа хандуулаарай.',
     'A complete digital back office — platform presence, social media, and guest communications — month-to-month with no lock-in.':

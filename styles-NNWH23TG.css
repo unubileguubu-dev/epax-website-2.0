@@ -17,3 +17,6 @@ google-logo::after{content:"EPAX";font-family:'Google Sans Flex','Google Sans',s
 }
 /* cookie bar removed — hide its orphaned footer control */
 .glue-cookie-notification-bar-control{display:none!important}
+
+/* "Built for hospitality" video carousel removed from the landing page */
+use-cases{display:none!important}
