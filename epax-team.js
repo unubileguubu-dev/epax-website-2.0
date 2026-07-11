@@ -82,6 +82,9 @@
   function start() {
     ensure();
     observer.observe(document.body, { childList: true, subtree: true });
+    /* debounce starves under continuous mutations (see epax-i18n.js note) —
+       a periodic idempotent ensure guarantees injection regardless */
+    setInterval(ensure, 1000);
   }
 
   if (document.readyState === 'loading') {

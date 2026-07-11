@@ -13,7 +13,8 @@
     '.epax-shop-link:hover{background:rgba(32,33,36,.06)}' +
     '.epax-shop-link:focus-visible{outline:2px solid #042C53;outline-offset:2px}' +
     '.epax-shop-link:active{background:rgba(32,33,36,.12)}' +
-    '.mobile-menu-content .epax-shop-link{width:100%;padding:16px 0;border-radius:0;font-size:16px}';
+    '.mobile-menu-content .epax-shop-link{width:100%;padding:24px;border-radius:0;font-size:28px;font-weight:450;' +
+      'color:#121317;border-top:1px solid #e6eaf0;line-height:1.2}';
   document.head.appendChild(css);
 
   function makeLink(id) {
@@ -27,11 +28,13 @@
 
   function place(scope, id) {
     if (document.getElementById(id)) return;
-    var buttons = scope.querySelectorAll('app-button button');
+    /* desktop nav wraps buttons in <app-button>; the mobile menu uses bare
+       buttons — anchor on whichever element actually hosts the Blog item */
+    var buttons = scope.querySelectorAll('button, a');
     for (var i = 0; i < buttons.length; i++) {
       var label = buttons[i].textContent.trim();
       if (label === 'Blog' || label === 'Блог') {
-        var host = buttons[i].closest('app-button');
+        var host = buttons[i].closest('app-button') || buttons[i];
         if (host && host.parentNode) host.parentNode.insertBefore(makeLink(id), host.nextSibling);
         return;
       }
@@ -55,6 +58,9 @@
   function start() {
     ensure();
     observer.observe(document.body, { childList: true, subtree: true });
+    /* debounce starves under continuous mutations (see epax-i18n.js note) —
+       a periodic idempotent ensure guarantees injection regardless */
+    setInterval(ensure, 1000);
   }
 
   if (document.readyState === 'loading') {

@@ -568,7 +568,12 @@
         existing.classList.remove('epax-fixed');
         existing.classList.add('epax-in-header');
         slot.insertBefore(existing, slot.firstChild);
-      } else if (!slotVisible && existing.offsetParent === null) {
+      } else if (!slotVisible && existing.parentElement !== document.body) {
+        /* stranded inside a hidden header slot — move to the fixed position.
+           NB: check the parent, not offsetParent: a position:fixed pill always
+           has offsetParent === null, and re-appending it on every observer
+           tick created an infinite mutation loop on mobile that starved every
+           other MutationObserver debounce on the page. */
         existing.classList.remove('epax-in-header');
         existing.classList.add('epax-fixed');
         document.body.appendChild(existing);
