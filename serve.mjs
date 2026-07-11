@@ -34,7 +34,13 @@ createServer(async (req, res) => {
     let file = join(ROOT, path);
 
     let s = await stat(file).catch(() => null);
-    if (!s || s.isDirectory()) {
+    if (s && s.isDirectory()) {
+      // static sub-site (e.g. /shop/) — serve its index.html when present
+      const idx = join(file, 'index.html');
+      const si = await stat(idx).catch(() => null);
+      if (si) { file = idx; s = si; }
+      else { file = join(ROOT, 'index.html'); s = null; }
+    } else if (!s) {
       if (extname(path)) {
         // A real file was requested and it's missing — report it honestly
         res.writeHead(404);
