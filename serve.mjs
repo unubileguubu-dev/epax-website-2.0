@@ -39,7 +39,10 @@ createServer(async (req, res) => {
       const idx = join(file, 'index.html');
       const si = await stat(idx).catch(() => null);
       if (si) { file = idx; s = si; }
-      else { file = join(ROOT, 'index.html'); s = null; }
+      else {
+        file = join(ROOT, 'index.html');
+        s = await stat(file).catch(() => null);
+      }
     } else if (!s) {
       if (extname(path)) {
         // A real file was requested and it's missing — report it honestly
@@ -47,8 +50,11 @@ createServer(async (req, res) => {
         res.end('not found');
         return;
       }
-      // SPA fallback: Angular router handles the path client-side
+      // SPA fallback: Angular router handles the path client-side.
+      // Re-stat so the gzip cache sees index.html's real mtime — otherwise
+      // fallback routes serve a stale cached copy after index.html changes.
       file = join(ROOT, 'index.html');
+      s = await stat(file).catch(() => null);
     }
 
     let body = await readFile(file);

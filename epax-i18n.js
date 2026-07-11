@@ -143,6 +143,18 @@
     'Off-season pause — pay only for months you operate': 'Улирлын завсарлага — зөвхөн ажиллаж буй саруудаа төлнө',
     'The EPAX guarantee: month one fails, month two is free': 'EPAX баталгаа: эхний сар үр дүнгүй бол дараагийн сар үнэгүй',
 
+    /* ---- audit request form ---- */
+    'Your name': 'Таны нэр',
+    'Business or property name': 'Бизнес, газрын нэр',
+    'Phone number': 'Утасны дугаар',
+    'Request my free audit': 'Үнэгүй аудит хүсэх',
+    'Sending…': 'Илгээж байна…',
+    'Please fill in all three fields.': 'Гурван талбарыг бүгдийг нь бөглөнө үү.',
+    'Could not send — opening your email app instead.': 'Илгээж чадсангүй — имэйл апп тань нээгдэнэ.',
+    'Received! Your audit will be ready within 24 hours — we will contact you.': 'Хүлээн авлаа! Таны аудит 24 цагийн дотор бэлэн болно — бид тантай холбогдоно.',
+    'Free · Ready in 24 hours · No commitment': 'Үнэгүй · 24 цагт бэлэн · Амлалт шаардахгүй',
+    'Prefer chat? Message us on Instagram': 'Чатаар харилцах уу? Instagram-аар бичээрэй',
+
     /* ---- free audit page ---- */
     'Request your': 'Үнэгүй аудитаа',
     'free audit': 'хүсээрэй',
