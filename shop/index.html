@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EPAX Shop — Collegiate Goods</title>
-<meta name="description" content="EPAX collegiate merchandise — fleeces, quarter-zips, polos, and caps in white, gold, and navy. First run sold out.">
+<meta name="description" content="EPAX collegiate merchandise — fleeces, quarter-zips, polos, and caps in gold and navy. First run sold out.">
 <link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,10 +68,9 @@
 
   /* ---------- grid ---------- */
   .shop{max-width:1240px;margin-inline:auto;padding:56px 24px 96px}
-  .shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-  @media (max-width:1100px){.shop-grid{grid-template-columns:repeat(3,1fr)}}
-  @media (max-width:820px){.shop-grid{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:520px){.shop-grid{grid-template-columns:1fr}}
+  .shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media (max-width:1000px){.shop-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.shop-grid{grid-template-columns:1fr}}
 
   .card{position:relative;background:var(--card);border:1px solid var(--hairline);border-radius:var(--radius);
     overflow:hidden;box-shadow:var(--shadow-rest);
@@ -79,11 +78,10 @@
   .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift)}
 
   .media{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--hairline)}
-  .media svg{width:74%;height:auto;filter:drop-shadow(0 10px 18px rgba(4,44,83,.10))}
-  .m-white{background:linear-gradient(180deg,#f4f1e8,#eeeadf)}
-  .m-gold{background:linear-gradient(180deg,#f6efdc,#f0e5c8)}
-  .m-navy{background:linear-gradient(180deg,#e8edf4,#dde5ef)}
-  .m-black{background:linear-gradient(180deg,#e9e9ec,#dedee3)}
+  .media svg{width:80%;height:auto}
+  .m-gold{background:radial-gradient(120% 100% at 50% 0%,#f8f2e2,#efe6cc)}
+  .m-navy{background:radial-gradient(120% 100% at 50% 0%,#eef2f7,#dbe3ee)}
+  .m-black{background:radial-gradient(120% 100% at 50% 0%,#ececef,#dcdce1)}
 
   .stamp{position:absolute;top:14px;right:-2px;transform:rotate(6deg);
     font-family:Graduate,serif;font-size:11px;letter-spacing:.18em;color:#fff;background:var(--navy);
@@ -121,7 +119,7 @@
   <p class="est">EST. 2025 · ULAANBAATAR</p>
   <h1>The EPAX Shop</h1>
   <p class="sub">Collegiate goods for the tourist-first era.</p>
-  <div class="laurel"><span>White · Gold · Navy</span></div>
+  <div class="laurel"><span>Gold · Navy</span></div>
   <div><span class="restock">The first run is sold out — the next drop is coming.</span></div>
 </section>
 
@@ -134,101 +132,242 @@
   <p>Peace in every process</p>
 </footer>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <!-- arched EPAX print -->
-    <path id="arc" d="M55,96 Q100,68 145,96" fill="none"/>
-    <!-- crew fleece -->
-    <symbol id="g-crew" viewBox="0 0 200 200">
-      <path fill="var(--g-fill)" stroke="var(--g-line)" stroke-width="1.6" d="M72,42 C82,34 118,34 128,42 L156,54 C165,58 170,66 171,76 L174,128 C174,136 169,141 161,140 L146,137 C140,136 137,132 137,126 L136,96 L136,152 C136,159 131,164 124,164 L76,164 C69,164 64,159 64,152 L64,96 L63,126 C63,132 60,136 54,137 L39,140 C31,141 26,136 26,128 L29,76 C30,66 35,58 44,54 Z"/>
-      <path stroke="var(--g-line)" d="M72,42 C82,52 118,52 128,42" fill="none" stroke-width="5"/>
-      <path stroke="var(--g-line)" d="M64,152 L136,152" fill="none" stroke-width="4" opacity=".5"/>
-    </symbol>
-    <!-- quarter zip -->
-    <symbol id="g-qzip" viewBox="0 0 200 200">
-      <path fill="var(--g-fill)" stroke="var(--g-line)" stroke-width="1.6" d="M72,40 C82,33 118,33 128,40 L156,54 C165,58 170,66 171,76 L174,128 C174,136 169,141 161,140 L146,137 C140,136 137,132 137,126 L136,96 L136,152 C136,159 131,164 124,164 L76,164 C69,164 64,159 64,152 L64,96 L63,126 C63,132 60,136 54,137 L39,140 C31,141 26,136 26,128 L29,76 C30,66 35,58 44,54 Z"/>
-      <path fill="var(--g-fill)" stroke="var(--g-line)" stroke-width="1.6" d="M76,40 L76,28 C84,22 116,22 124,28 L124,40 C114,48 86,48 76,40 Z"/>
-      <path stroke="var(--g-line)" d="M100,46 L100,88" fill="none" stroke-width="4"/>
-      <circle fill="var(--g-line)" cx="100" cy="92" r="3.4"/>
-    </symbol>
-    <!-- polo -->
-    <symbol id="g-polo" viewBox="0 0 200 200">
-      <path fill="var(--g-fill)" stroke="var(--g-line)" stroke-width="1.6" d="M74,42 C84,35 116,35 126,42 L152,54 C161,58 166,66 167,76 L168,104 C168,111 163,115 156,114 L143,111 C138,110 136,107 136,102 L136,152 C136,159 131,164 124,164 L76,164 C69,164 64,159 64,152 L64,102 C64,107 62,110 57,111 L44,114 C37,115 32,111 32,104 L33,76 C34,66 39,58 48,54 Z"/>
-      <path fill="var(--g-fill)" stroke="var(--g-line)" stroke-width="1.6" d="M84,40 L100,62 L116,40 C106,34 94,34 84,40 Z"/>
-      <path stroke="var(--g-line)" d="M100,62 L100,92" fill="none" stroke-width="3.4"/>
-      <circle fill="var(--g-line)" cx="100" cy="74" r="2.4"/>
-      <circle fill="var(--g-line)" cx="100" cy="84" r="2.4"/>
-    </symbol>
-    <!-- cap -->
-    <symbol id="g-cap" viewBox="0 0 200 200">
-      <path fill="var(--g-fill)" stroke="var(--g-line)" stroke-width="1.6" d="M38,116 C38,74 68,52 100,52 C132,52 162,74 162,116 L162,122 L38,122 Z"/>
-      <path stroke="var(--g-line)" d="M100,52 L100,122 M69,58 C62,78 60,98 60,122 M131,58 C138,78 140,98 140,122" fill="none" stroke-width="2.6" opacity=".45"/>
-      <path fill="var(--g-fill)" stroke="var(--g-line)" stroke-width="1.6" d="M96,122 L168,122 C180,122 184,132 175,138 C152,150 120,153 98,150 Z"/>
-      <circle fill="var(--g-line)" cx="100" cy="50" r="4"/>
-    </symbol>
-  </defs>
-</svg>
-
 <script>
 (function () {
   'use strict';
-  /* garment fill / outline / print color per colorway */
+
+  /* ---------- color math ---------- */
+  function mix(hex, target, f) {
+    var h = hex.replace('#', ''), t = target.replace('#', ''), out = '#';
+    for (var i = 0; i < 3; i++) {
+      var a = parseInt(h.substr(i * 2, 2), 16), b = parseInt(t.substr(i * 2, 2), 16);
+      out += Math.round(a + (b - a) * f).toString(16).padStart(2, '0');
+    }
+    return out;
+  }
+  var lighten = function (c, f) { return mix(c, '#ffffff', f); };
+  var darken = function (c, f) { return mix(c, '#000000', f); };
+
   var COLORWAYS = {
-    white: { fill: '#fdfdfb', line: '#cfc9b8', print: '#042C53', cls: 'm-white' },
-    gold:  { fill: '#C9A84C', line: '#a8893a', print: '#042C53', cls: 'm-gold' },
-    navy:  { fill: '#042C53', line: '#021d38', print: '#C9A84C', cls: 'm-navy' },
-    black: { fill: '#181a1f', line: '#000000', print: 'brand',   cls: 'm-black' }
+    gold:  { base: '#C9A84C', print: '#042C53', printHi: '#0a3a68', cls: 'm-gold' },
+    navy:  { base: '#0d3a66', print: '#C9A84C', printHi: '#e0c67e', cls: 'm-navy' },
+    black: { base: '#1d1f24', print: 'brand',   printHi: '#e0c67e', cls: 'm-black' }
   };
-  var COLOR_LABEL = { white: 'White', gold: 'Gold', navy: 'Navy', black: 'Black' };
+  var COLOR_LABEL = { gold: 'Gold', navy: 'Navy', black: 'Black' };
 
-  var PRODUCTS = [
-    { sym: 'g-crew', name: 'Collegiate Fleece Crew', price: '$58',
-      desc: 'Heavyweight brushed fleece with the embroidered EPAX arch across the chest.',
-      blackDesc: 'Midnight edition — the EPAX arch embroidered in full brand color.',
-      colors: ['white', 'gold', 'navy', 'black'] },
-    { sym: 'g-qzip', name: 'Heritage Quarter-Zip', price: '$64',
-      desc: 'Collegiate quarter-zip in brushed knit with a tonal collar and embroidered arch.',
-      blackDesc: 'Midnight edition quarter-zip with the EPAX arch in full brand color.',
-      colors: ['white', 'gold', 'navy', 'black'] },
-    { sym: 'g-polo', name: 'Club Polo', price: '$48',
-      desc: 'Breathable piqué polo with a small EPAX arch at the chest — front-desk ready.',
-      colors: ['white', 'gold', 'navy'] },
-    { sym: 'g-cap', name: 'Crest Cap', price: '$28',
-      desc: 'Six-panel cotton cap with raised EPAX embroidery and an adjustable strap.',
-      colors: ['white', 'gold', 'navy'] }
-  ];
-
-  function garment(sym, cw) {
-    var brand = cw.print === 'brand';
-    var printFill = brand ? '#C9A84C' : cw.print;
-    var arch =
-      '<text font-family="Graduate,serif" font-size="21" letter-spacing="6" fill="' + printFill + '">' +
-        '<textPath href="#arc" startOffset="50%" text-anchor="middle">EPAX</textPath>' +
-      '</text>' +
-      (brand
-        ? '<g transform="translate(100,112)">' +
-            '<path d="M-9,-9 L9,9 M9,-9 L-9,9" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round"/>' +
-            '<path d="M0,-13 L0,13 M-13,0 L13,0" stroke="#C9A84C" stroke-width="4.5" stroke-linecap="round"/>' +
-          '</g>'
-        : '<g transform="translate(100,112)">' +
-            '<path d="M-7,-7 L7,7 M7,-7 L-7,7 M0,-10 L0,10 M-10,0 L10,0" stroke="' + printFill + '" stroke-width="3.6" stroke-linecap="round"/>' +
-          '</g>');
-    var capPrint =
-      '<text x="100" y="102" text-anchor="middle" font-family="Graduate,serif" font-size="17" letter-spacing="4" fill="' + printFill + '">EPAX</text>';
-    return '<svg viewBox="0 0 200 200" role="img" style="--g-fill:' + cw.fill + ';--g-line:' + cw.line + '">' +
-      '<use href="#' + sym + '"/>' + (sym === 'g-cap' ? capPrint : arch) +
-      '</svg>';
+  /* ---------- shared paint fragments ---------- */
+  function defs(id, cw) {
+    var b = cw.base;
+    return '<defs>' +
+      /* body fabric: light falls from upper left */
+      '<linearGradient id="body' + id + '" x1="0" y1="0" x2=".25" y2="1">' +
+        '<stop offset="0" stop-color="' + lighten(b, .18) + '"/>' +
+        '<stop offset=".45" stop-color="' + b + '"/>' +
+        '<stop offset="1" stop-color="' + darken(b, .22) + '"/>' +
+      '</linearGradient>' +
+      '<linearGradient id="rib' + id + '" x1="0" y1="0" x2="0" y2="1">' +
+        '<stop offset="0" stop-color="' + darken(b, .10) + '"/>' +
+        '<stop offset="1" stop-color="' + darken(b, .30) + '"/>' +
+      '</linearGradient>' +
+      '<radialGradient id="sheen' + id + '" cx=".5" cy=".35" r=".65">' +
+        '<stop offset="0" stop-color="#ffffff" stop-opacity=".14"/>' +
+        '<stop offset=".7" stop-color="#ffffff" stop-opacity="0"/>' +
+      '</radialGradient>' +
+      '<filter id="soft' + id + '" x="-20%" y="-20%" width="140%" height="140%">' +
+        '<feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#042C53" flood-opacity=".22"/>' +
+      '</filter>' +
+      '<filter id="emb' + id + '" x="-20%" y="-20%" width="140%" height="140%">' +
+        '<feDropShadow dx="0" dy=".7" stdDeviation=".35" flood-color="#000000" flood-opacity=".45"/>' +
+      '</filter>' +
+      '<filter id="knit' + id + '"><feTurbulence type="fractalNoise" baseFrequency=".55" numOctaves="2" result="n"/>' +
+        '<feColorMatrix in="n" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .06 0"/><feComposite operator="in" in2="SourceGraphic"/></filter>' +
+      '</defs>';
   }
 
+  function ribHatch(x1, x2, y1, y2, step, color) {
+    var s = '';
+    for (var x = x1; x <= x2; x += step)
+      s += '<line x1="' + x + '" y1="' + y1 + '" x2="' + x + '" y2="' + y2 + '" stroke="' + color + '" stroke-width=".9" opacity=".35"/>';
+    return s;
+  }
+
+  function arch(id, cw, small) {
+    var brand = cw.print === 'brand';
+    var fillC = brand ? '#C9A84C' : cw.print;
+    var star = brand
+      ? '<g transform="translate(100,118)" filter="url(#emb' + id + ')">' +
+          '<path d="M-8,-8 L8,8 M8,-8 L-8,8" stroke="#f4f4f2" stroke-width="4.2" stroke-linecap="round"/>' +
+          '<path d="M0,-11.5 L0,11.5 M-11.5,0 L11.5,0" stroke="#C9A84C" stroke-width="4.2" stroke-linecap="round"/>' +
+        '</g>'
+      : '<g transform="translate(100,118)" filter="url(#emb' + id + ')">' +
+          '<path d="M-6.5,-6.5 L6.5,6.5 M6.5,-6.5 L-6.5,6.5 M0,-9.5 L0,9.5 M-9.5,0 L9.5,0" stroke="' + fillC + '" stroke-width="3.4" stroke-linecap="round"/>' +
+        '</g>';
+    return '<path id="arc' + id + '" d="M56,102 Q100,74 144,102" fill="none"/>' +
+      '<text font-family="Graduate,serif" font-size="20" letter-spacing="5.5" fill="' + fillC + '" filter="url(#emb' + id + ')">' +
+        '<textPath href="#arc' + id + '" startOffset="50%" text-anchor="middle">EPAX</textPath></text>' +
+      (small ? '' : star);
+  }
+
+  /* ---------- garments ---------- */
+  var BODY_CREW = 'M78,46 C84,40 116,40 122,46 L148,56 C158,60 163,68 165,78 L172,120 C173,128 170,133 162,135 L146,139 C139,140 135,137 134,130 L132,102 L132,150 C132,158 127,162 119,162 L81,162 C73,162 68,158 68,150 L68,102 L66,130 C65,137 61,140 54,139 L38,135 C30,133 27,128 28,120 L35,78 C37,68 42,60 52,56 Z';
+
+  function creases(dark) {
+    return '<g stroke="' + dark + '" stroke-width="2.4" fill="none" opacity=".28" stroke-linecap="round">' +
+      '<path d="M70,96 C74,104 74,116 71,126"/>' +
+      '<path d="M130,96 C126,104 126,116 129,126"/>' +
+      '<path d="M84,132 C92,136 108,136 116,132"/>' +
+      '<path d="M136,72 C140,80 142,92 141,104"/>' +
+      '<path d="M64,72 C60,80 58,92 59,104"/>' +
+    '</g>' +
+    '<g stroke="#ffffff" stroke-width="2" fill="none" opacity=".14" stroke-linecap="round">' +
+      '<path d="M58,60 C66,55 76,52 84,51"/>' +
+      '<path d="M142,60 C134,55 124,52 116,51"/>' +
+    '</g>';
+  }
+
+  function crew(id, cw) {
+    var b = cw.base, dark = darken(b, .4), ribHi = darken(b, .16);
+    return '<svg viewBox="0 0 200 200" role="img">' + defs(id, cw) +
+      '<g filter="url(#soft' + id + ')">' +
+        '<path d="' + BODY_CREW + '" fill="url(#body' + id + ')"/>' +
+        /* cuffs */
+        '<path d="M28,120 L63,128 L61,140 C60,146 56,148 50,147 L36,144 C30,143 27,139 28,133 Z" fill="url(#rib' + id + ')"/>' +
+        '<path d="M172,120 L137,128 L139,140 C140,146 144,148 150,147 L164,144 C170,143 173,139 172,133 Z" fill="url(#rib' + id + ')"/>' +
+        /* hem */
+        '<path d="M68,148 L132,148 L132,152 C132,159 127,163 119,163 L81,163 C73,163 68,159 68,152 Z" fill="url(#rib' + id + ')"/>' +
+        ribHatch(72, 128, 150, 162, 4, ribHi) +
+        /* collar */
+        '<path d="M78,46 C84,40 116,40 122,46 L119,53 C112,47 88,47 81,53 Z" fill="url(#rib' + id + ')"/>' +
+        '<path d="M81,53 C88,59 112,59 119,53 L120,57 C111,63 89,63 80,57 Z" fill="' + darken(b, .32) + '" opacity=".55"/>' +
+        creases(dark) +
+        '<path d="' + BODY_CREW + '" fill="url(#sheen' + id + ')"/>' +
+        '<path d="' + BODY_CREW + '" fill="' + b + '" filter="url(#knit' + id + ')" opacity=".5"/>' +
+        '<path d="' + BODY_CREW + '" fill="none" stroke="' + darken(b, .45) + '" stroke-width="1.1" opacity=".6"/>' +
+        arch(id, cw) +
+      '</g></svg>';
+  }
+
+  function qzip(id, cw) {
+    var b = cw.base, dark = darken(b, .4), ribHi = darken(b, .16), zipMetal = cw.print === 'brand' ? '#C9A84C' : (cw.print === '#042C53' ? '#5a6b80' : '#d8c184');
+    return '<svg viewBox="0 0 200 200" role="img">' + defs(id, cw) +
+      '<g filter="url(#soft' + id + ')">' +
+        /* stand collar behind */
+        '<path d="M78,30 C84,24 116,24 122,30 L122,48 C112,42 88,42 78,48 Z" fill="url(#rib' + id + ')"/>' +
+        '<path d="' + BODY_CREW + '" fill="url(#body' + id + ')"/>' +
+        /* collar front halves */
+        '<path d="M78,46 L78,30 C84,25 97,24 99,24 L99,50 C91,48 83,46 78,46 Z" fill="url(#rib' + id + ')" stroke="' + darken(b, .35) + '" stroke-width=".8"/>' +
+        '<path d="M122,46 L122,30 C116,25 103,24 101,24 L101,50 C109,48 117,46 122,46 Z" fill="url(#rib' + id + ')" stroke="' + darken(b, .35) + '" stroke-width=".8"/>' +
+        /* cuffs + hem */
+        '<path d="M28,120 L63,128 L61,140 C60,146 56,148 50,147 L36,144 C30,143 27,139 28,133 Z" fill="url(#rib' + id + ')"/>' +
+        '<path d="M172,120 L137,128 L139,140 C140,146 144,148 150,147 L164,144 C170,143 173,139 172,133 Z" fill="url(#rib' + id + ')"/>' +
+        '<path d="M68,148 L132,148 L132,152 C132,159 127,163 119,163 L81,163 C73,163 68,159 68,152 Z" fill="url(#rib' + id + ')"/>' +
+        ribHatch(72, 128, 150, 162, 4, ribHi) +
+        /* zipper */
+        '<rect x="97.4" y="50" width="5.2" height="46" rx="1.5" fill="' + darken(b, .5) + '"/>' +
+        '<line x1="100" y1="51" x2="100" y2="95" stroke="' + zipMetal + '" stroke-width="1.6" stroke-dasharray="1.6 1.1"/>' +
+        '<rect x="96.6" y="94" width="6.8" height="5" rx="1.6" fill="' + zipMetal + '"/>' +
+        '<path d="M100,99 L100,106 M98.4,106.5 a1.7,2.4 0 1 0 3.2,0 a1.7,2.4 0 1 0 -3.2,0" stroke="' + zipMetal + '" stroke-width="1.5" fill="none"/>' +
+        creases(dark) +
+        '<path d="' + BODY_CREW + '" fill="url(#sheen' + id + ')"/>' +
+        '<path d="' + BODY_CREW + '" fill="' + b + '" filter="url(#knit' + id + ')" opacity=".5"/>' +
+        '<path d="' + BODY_CREW + '" fill="none" stroke="' + darken(b, .45) + '" stroke-width="1.1" opacity=".6"/>' +
+        arch(id, cw) +
+      '</g></svg>';
+  }
+
+  var BODY_POLO = 'M80,44 C86,38 114,38 120,44 L146,54 C154,57 159,64 160,72 L164,98 C165,105 162,109 155,110 L142,112 C136,113 133,110 132,104 L131,92 L132,152 C132,159 127,163 119,163 L81,163 C73,163 68,159 68,152 L69,92 L68,104 C67,110 64,113 58,112 L45,110 C38,109 35,105 36,98 L40,72 C41,64 46,57 54,54 Z';
+
+  function polo(id, cw) {
+    var b = cw.base, dark = darken(b, .4);
+    return '<svg viewBox="0 0 200 200" role="img">' + defs(id, cw) +
+      '<g filter="url(#soft' + id + ')">' +
+        '<path d="' + BODY_POLO + '" fill="url(#body' + id + ')"/>' +
+        /* sleeve cuff bands */
+        '<path d="M36,96 L68,102 L68,110 C64,113 45,111 42,109 C38,107 36,102 36,96 Z" fill="' + darken(b, .18) + '" opacity=".8"/>' +
+        '<path d="M164,96 L132,102 L132,110 C136,113 155,111 158,109 C162,107 164,102 164,96 Z" fill="' + darken(b, .18) + '" opacity=".8"/>' +
+        /* placket */
+        '<rect x="94" y="58" width="12" height="36" rx="2.5" fill="' + darken(b, .12) + '" stroke="' + darken(b, .35) + '" stroke-width=".7"/>' +
+        '<line x1="100" y1="60" x2="100" y2="92" stroke="' + darken(b, .35) + '" stroke-width=".8"/>' +
+        '<circle cx="97" cy="70" r="2" fill="' + lighten(b, .5) + '" stroke="' + darken(b, .4) + '" stroke-width=".5"/>' +
+        '<circle cx="97" cy="82" r="2" fill="' + lighten(b, .5) + '" stroke="' + darken(b, .4) + '" stroke-width=".5"/>' +
+        /* collar */
+        '<path d="M80,44 C86,37 114,37 120,44 L109,60 L101,52 L100,58 L99,52 L91,60 Z" fill="url(#rib' + id + ')" stroke="' + darken(b, .35) + '" stroke-width=".8"/>' +
+        '<path d="M91,60 L99,52 L100,58 Z M109,60 L101,52 L100,58 Z" fill="' + darken(b, .28) + '" opacity=".5"/>' +
+        creases(dark) +
+        '<path d="' + BODY_POLO + '" fill="url(#sheen' + id + ')"/>' +
+        '<path d="' + BODY_POLO + '" fill="' + b + '" filter="url(#knit' + id + ')" opacity=".4"/>' +
+        '<path d="' + BODY_POLO + '" fill="none" stroke="' + darken(b, .45) + '" stroke-width="1.1" opacity=".6"/>' +
+        arch(id, cw, true) +
+        '<g transform="translate(100,116) scale(.8)">' +
+          (cw.print === 'brand'
+            ? '<path d="M-8,-8 L8,8 M8,-8 L-8,8" stroke="#f4f4f2" stroke-width="4.2" stroke-linecap="round"/><path d="M0,-11.5 L0,11.5 M-11.5,0 L11.5,0" stroke="#C9A84C" stroke-width="4.2" stroke-linecap="round"/>'
+            : '<path d="M-6.5,-6.5 L6.5,6.5 M6.5,-6.5 L-6.5,6.5 M0,-9.5 L0,9.5 M-9.5,0 L9.5,0" stroke="' + cw.print + '" stroke-width="3.4" stroke-linecap="round"/>') +
+        '</g>' +
+      '</g></svg>';
+  }
+
+  function cap(id, cw) {
+    var b = cw.base, dark = darken(b, .4), fillC = cw.print === 'brand' ? '#C9A84C' : cw.print;
+    return '<svg viewBox="0 0 200 200" role="img">' + defs(id, cw) +
+      '<g filter="url(#soft' + id + ')">' +
+        /* crown */
+        '<path d="M48,116 C48,74 72,54 100,54 C128,54 152,74 152,116 L152,122 L48,122 Z" fill="url(#body' + id + ')"/>' +
+        /* panel seams with stitching */
+        '<g fill="none" stroke="' + darken(b, .35) + '" stroke-width="1.4" opacity=".7">' +
+          '<path d="M100,54 L100,122"/>' +
+          '<path d="M76,60 C69,80 66,100 66,122"/>' +
+          '<path d="M124,60 C131,80 134,100 134,122"/>' +
+        '</g>' +
+        '<g fill="none" stroke="' + lighten(b, .3) + '" stroke-width=".7" stroke-dasharray="2 2" opacity=".5">' +
+          '<path d="M97,56 L97,122"/><path d="M103,56 L103,122"/>' +
+        '</g>' +
+        /* eyelets */
+        '<circle cx="82" cy="78" r="2.2" fill="' + darken(b, .45) + '"/><circle cx="118" cy="78" r="2.2" fill="' + darken(b, .45) + '"/>' +
+        /* crown shading */
+        '<path d="M48,116 C48,74 72,54 100,54 C128,54 152,74 152,116 L152,122 L48,122 Z" fill="url(#sheen' + id + ')"/>' +
+        '<path d="M48,116 C48,74 72,54 100,54 C128,54 152,74 152,116 L152,122 L48,122 Z" fill="' + b + '" filter="url(#knit' + id + ')" opacity=".45"/>' +
+        /* brim: front curved */
+        '<path d="M53,122 L147,122 C153,122 156,126 154,131 C148,146 127,155 100,155 C73,155 52,146 46,131 C44,126 47,122 53,122 Z" fill="url(#rib' + id + ')"/>' +
+        '<path d="M50,130 C58,143 76,151 100,151 C124,151 142,143 150,130 C143,146 124,155 100,155 C76,155 57,146 50,130 Z" fill="' + darken(b, .45) + '" opacity=".5"/>' +
+        '<path d="M56,124 C68,131 132,131 144,124" fill="none" stroke="' + lighten(b, .25) + '" stroke-width=".8" stroke-dasharray="2 2" opacity=".55"/>' +
+        '<path d="M53,122 L147,122 C153,122 156,126 154,131 C148,146 127,155 100,155 C73,155 52,146 46,131 C44,126 47,122 53,122 Z" fill="none" stroke="' + darken(b, .45) + '" stroke-width="1.1" opacity=".6"/>' +
+        /* button */
+        '<circle cx="100" cy="54" r="3.6" fill="' + darken(b, .25) + '" stroke="' + darken(b, .45) + '" stroke-width=".8"/>' +
+        /* embroidery */
+        '<path id="cArc' + id + '" d="M72,104 Q100,92 128,104" fill="none"/>' +
+        '<text font-family="Graduate,serif" font-size="15" letter-spacing="3.5" fill="' + fillC + '" filter="url(#emb' + id + ')">' +
+          '<textPath href="#cArc' + id + '" startOffset="50%" text-anchor="middle">EPAX</textPath></text>' +
+      '</g></svg>';
+  }
+
+  /* ---------- catalog ---------- */
+  var BUILDERS = { crew: crew, qzip: qzip, polo: polo, cap: cap };
+  var PRODUCTS = [
+    { kind: 'crew', name: 'Collegiate Fleece Crew', price: '$58',
+      desc: 'Heavyweight brushed fleece with the embroidered EPAX arch across the chest.',
+      blackDesc: 'Midnight edition — the EPAX arch embroidered in full brand color.',
+      colors: ['gold', 'navy', 'black'] },
+    { kind: 'qzip', name: 'Heritage Quarter-Zip', price: '$64',
+      desc: 'Collegiate quarter-zip in brushed knit with a tonal collar and embroidered arch.',
+      blackDesc: 'Midnight edition quarter-zip with the EPAX arch in full brand color.',
+      colors: ['gold', 'navy', 'black'] },
+    { kind: 'polo', name: 'Club Polo', price: '$48',
+      desc: 'Breathable piqué polo with a small EPAX arch at the chest — front-desk ready.',
+      colors: ['gold', 'navy'] },
+    { kind: 'cap', name: 'Crest Cap', price: '$28',
+      desc: 'Six-panel cotton cap with raised EPAX embroidery and an adjustable strap.',
+      colors: ['gold', 'navy'] }
+  ];
+
   var grid = document.getElementById('grid');
-  var html = '';
+  var html = '', uid = 0;
   PRODUCTS.forEach(function (p) {
     p.colors.forEach(function (c) {
       var cw = COLORWAYS[c];
       var desc = (c === 'black' && p.blackDesc) ? p.blackDesc : p.desc;
       html +=
         '<article class="card">' +
-          '<div class="media ' + cw.cls + '">' + garment(p.sym, cw) +
+          '<div class="media ' + cw.cls + '">' + BUILDERS[p.kind]('u' + (uid++), cw) +
             '<span class="stamp">Sold out</span>' +
           '</div>' +
           '<div class="info">' +

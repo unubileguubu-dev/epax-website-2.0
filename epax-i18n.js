@@ -288,7 +288,7 @@
     "Back to EPAX": "EPAX руу буцах",
     "The EPAX Shop": "EPAX дэлгүүр",
     "Collegiate goods for the tourist-first era.": "Жуулчны эрин үеийн коллежийн загварын эдлэл.",
-    "White · Gold · Navy": "Цагаан · Алтлаг · Гүн хөх",
+    "Gold · Navy": "Алтлаг · Гүн хөх",
     "The first run is sold out — the next drop is coming.": "Эхний цуврал зарагдаж дууслаа — дараагийн цуврал удахгүй.",
     "EST. 2025 · ULAANBAATAR": "2025 ОНД · УЛААНБААТАРТ",
     "Collegiate Fleece Crew": "Коллежийн флийс цамц",
