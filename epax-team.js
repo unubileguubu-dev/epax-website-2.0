@@ -5,6 +5,8 @@
 (function () {
   'use strict';
 
+  var ID = 'epaxTeam';
+
   var css = document.createElement('style');
   css.textContent =
     '#epaxTeam{padding-block:96px;border-top:1px solid rgba(33,34,38,.08)}' +
@@ -75,6 +77,9 @@
 
   var pending = 0;
   var observer = new MutationObserver(function () {
+    /* if the SPA bootstrap just wiped our section, restore it synchronously —
+       waiting out a debounce here causes visible layout shift (CLS) */
+    if ((location.pathname === '/' || location.pathname === '/index.html') && !document.getElementById(ID)) { ensure(); return; }
     clearTimeout(pending);
     pending = setTimeout(ensure, 80);
   });

@@ -7,6 +7,8 @@
 (function () {
   'use strict';
 
+  var ID = 'epaxAuditForm';
+
   var ENDPOINT = 'https://formsubmit.co/ajax/hello@epax.mn';
   var IG = 'https://ig.me/m/epax.ub';
 
@@ -128,6 +130,9 @@
 
   var pending = 0;
   var observer = new MutationObserver(function () {
+    /* if the SPA bootstrap just wiped our section, restore it synchronously —
+       waiting out a debounce here causes visible layout shift (CLS) */
+    if ((location.pathname === '/download') && !document.getElementById(ID)) { ensure(); return; }
     clearTimeout(pending);
     pending = setTimeout(ensure, 80);
   });

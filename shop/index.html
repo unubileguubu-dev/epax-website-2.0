@@ -15,8 +15,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@300..700&family=Graduate&display=swap" rel="stylesheet">
-<script src="/epax-i18n.js?v=260713" defer></script>
+<script src="/epax-i18n.js?v=260714" defer></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script>addEventListener('error',function(e){try{window.va('event',{name:'js_error',data:{m:String(e.message).slice(0,80),s:String(e.filename).split('/').pop().slice(0,40)}})}catch(_){}});addEventListener('unhandledrejection',function(e){try{window.va('event',{name:'js_rejection',data:{m:String(e.reason).slice(0,80)}})}catch(_){}});</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <style>
   :root{
@@ -100,7 +101,7 @@
   .p-desc{margin-top:8px;font-size:13px;line-height:1.7;color:var(--muted);min-height:3.4em}
   .p-row{margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:12px}
   .p-price{font-size:15px;font-weight:600;color:var(--ink)}
-  .p-price s{color:#9aa0a6;font-weight:500}
+  .p-price s{color:#6f7478;font-weight:500}
   .p-btn{font-size:12.5px;letter-spacing:.03em;padding:9px 16px;border-radius:999px;border:1px solid var(--hairline);
     background:#f1efe8;color:#9aa0a6;cursor:not-allowed;user-select:none}
 
@@ -132,6 +133,7 @@
 </section>
 
 <main class="shop">
+  <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Catalog</h2>
   <div class="shop-grid" id="grid"></div>
 </main>
 
@@ -235,7 +237,7 @@
 
   function crew(id, cw) {
     var b = cw.base, dark = darken(b, .4), ribHi = darken(b, .16);
-    return '<svg viewBox="0 0 200 200" role="img">' + defs(id, cw) +
+    return '<svg viewBox="0 0 200 200" aria-hidden="true">' + defs(id, cw) +
       '<g filter="url(#soft' + id + ')">' +
         '<path d="' + BODY_CREW + '" fill="url(#body' + id + ')"/>' +
         /* cuffs */
@@ -257,7 +259,7 @@
 
   function qzip(id, cw) {
     var b = cw.base, dark = darken(b, .4), ribHi = darken(b, .16), zipMetal = cw.print === 'brand' ? '#C9A84C' : (cw.print === '#042C53' ? '#5a6b80' : '#d8c184');
-    return '<svg viewBox="0 0 200 200" role="img">' + defs(id, cw) +
+    return '<svg viewBox="0 0 200 200" aria-hidden="true">' + defs(id, cw) +
       '<g filter="url(#soft' + id + ')">' +
         /* stand collar behind */
         '<path d="M78,30 C84,24 116,24 122,30 L122,48 C112,42 88,42 78,48 Z" fill="url(#rib' + id + ')"/>' +
@@ -287,7 +289,7 @@
 
   function polo(id, cw) {
     var b = cw.base, dark = darken(b, .4);
-    return '<svg viewBox="0 0 200 200" role="img">' + defs(id, cw) +
+    return '<svg viewBox="0 0 200 200" aria-hidden="true">' + defs(id, cw) +
       '<g filter="url(#soft' + id + ')">' +
         '<path d="' + BODY_POLO + '" fill="url(#body' + id + ')"/>' +
         /* sleeve cuff bands */
@@ -316,7 +318,7 @@
 
   function cap(id, cw) {
     var b = cw.base, dark = darken(b, .4), fillC = cw.print === 'brand' ? '#C9A84C' : cw.print;
-    return '<svg viewBox="0 0 200 200" role="img">' + defs(id, cw) +
+    return '<svg viewBox="0 0 200 200" aria-hidden="true">' + defs(id, cw) +
       '<g filter="url(#soft' + id + ')">' +
         /* crown */
         '<path d="M48,116 C48,74 72,54 100,54 C128,54 152,74 152,116 L152,122 L48,122 Z" fill="url(#body' + id + ')"/>' +

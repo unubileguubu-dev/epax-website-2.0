@@ -486,6 +486,12 @@
     if (out && out !== key) node.nodeValue = raw.replace(key, out);
   }
 
+  /* a11y: aria-label is prohibited on <p>; the compiled templates set it on
+     feature descriptions. Strip at runtime (idempotent, re-run by observer). */
+  function fixProhibitedAria() {
+    document.querySelectorAll('p[aria-label]').forEach(function (p) { p.removeAttribute('aria-label'); });
+  }
+
   function translatePage(dict) {
     var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
       acceptNode: function (n) {
@@ -517,6 +523,7 @@
     clearTimeout(pending);
     pending = setTimeout(function () {
       ensureToggle();
+      fixProhibitedAria();
       if (lang === 'mn') translatePage(MN);
     }, 60);
   });
@@ -604,6 +611,7 @@
 
   function start() {
     ensureToggle();
+    fixProhibitedAria();
     observer.observe(document.body, { childList: true, characterData: true, subtree: true });
     if (lang === 'mn') translatePage(MN);
   }

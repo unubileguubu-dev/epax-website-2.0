@@ -24,3 +24,6 @@ use-cases{display:none!important}
 /* hero headline: no static flash before the typing animation starts —
    hide the text until SplitText has split it into animatable chars */
 .typed-container.landing-main .typed-content{visibility:hidden}
+
+/* a11y: pricing chip label was #3279f9 (3.94:1); AA needs 4.5:1 */
+.pricing-card label.small{color:#1967d2!important}

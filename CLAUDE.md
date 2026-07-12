@@ -8,6 +8,14 @@
 - If no reference image: design from scratch with high craft (see guardrails below).
 - Screenshot your output, compare against reference, fix mismatches, re-screenshot. Do at least 2 comparison rounds. Stop only when no visible differences remain or user says so.
 
+## This project has a handbook
+- **Read `MAINTENANCE.md` first** — architecture, the three iron rules
+  (fingerprint-rename on every bundle/css change, regenerate snapshots with
+  `node prerender.mjs`, run `node doctor.mjs --live` before every push),
+  the Mongolian i18n rules, and past incidents. Do not modify the site
+  without following it.
+- Verify every change at BOTH 1440px and 390px viewports.
+
 ## Local Server
 - **Always serve on localhost** — never screenshot a `file:///` URL.
 - Start the dev server: `node serve.mjs` (serves the project root at `http://localhost:3000`)
@@ -15,7 +23,9 @@
 - If the server is already running, do not start a second instance.
 
 ## Screenshot Workflow
-- Puppeteer is installed at `C:/Users/nateh/AppData/Local/Temp/puppeteer-test/`. Chrome cache is at `C:/Users/nateh/.cache/puppeteer/`.
+- puppeteer-core is installed in the project root `node_modules/` (reinstall with
+  `npm install puppeteer-core axe-core --no-save`); it drives system Chrome at
+  `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`.
 - **Always screenshot from localhost:** `node screenshot.mjs http://localhost:3000`
 - Screenshots are saved automatically to `./temporary screenshots/screenshot-N.png` (auto-incremented, never overwritten).
 - Optional label suffix: `node screenshot.mjs http://localhost:3000 label` → saves as `screenshot-N-label.png`
@@ -25,7 +35,9 @@
 - Check: spacing/padding, font size/weight/line-height, colors (exact hex), alignment, border-radius, shadows, image sizing
 
 ## Output Defaults
-- Single `index.html` file, all styles inline, unless user says otherwise
+- NOTE: root `index.html` and all route directories are GENERATED snapshots —
+  edit `shell.html` and run `node prerender.mjs` instead (see MAINTENANCE.md)
+- For new standalone pages: single html file, styles inline, unless user says otherwise
 - Tailwind CSS via CDN: `<script src="https://cdn.tailwindcss.com"></script>`
 - Placeholder images: `https://placehold.co/WIDTHxHEIGHT`
 - Mobile-first responsive

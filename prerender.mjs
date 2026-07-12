@@ -90,6 +90,18 @@ const shell = readFileSync(join(ROOT, 'shell.html'), 'utf8');
 for (const m of shell.matchAll(/(?:src|href)="(main-[A-Z0-9]+\.js|styles-[A-Z0-9]+\.css)"/g)) {
   if (!existsSync(join(ROOT, m[1]))) { console.error('MISSING ASSET in shell.html:', m[1]); process.exit(1); }
 }
+const SHELL_BUNDLE = (shell.match(/src="(main-[A-Z0-9]+\.js)"/) || [])[1];
+const SHELL_STYLES = (shell.match(/href="(styles-[A-Z0-9]+\.css)"/) || [])[1];
+const SHELL_V = (shell.match(/epax-i18n\.js\?v=(\d+)/) || [])[1];
+
+/* the crawl may be served from snapshots of an OLDER shell — rewrite any
+   stale fingerprint/version references to the current ones */
+function normalizeAssets(html) {
+  html = html.replace(/main-[A-Z0-9]+\.js/g, SHELL_BUNDLE);
+  html = html.replace(/styles-[A-Z0-9]+\.css/g, SHELL_STYLES);
+  html = html.replace(/(epax-[a-z0-9-]+\.js\?v=)\d+/g, `$1${SHELL_V}`);
+  return html;
+}
 
 const browser = await puppeteer.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: 'new' });
 
@@ -166,7 +178,7 @@ for (const lang of ['en', 'mn']) {
         h1: (document.querySelector('h1')?.textContent || '').replace(/\s+/g, ' ').trim(),
       };
     });
-    html = headSurgery(html, route, lang, h1);
+    html = normalizeAssets(headSurgery(html, route, lang, h1));
     const rel = (lang === 'mn' ? 'mn' + (route === '/' ? '' : route) : route === '/' ? '.' : route.slice(1));
     const dir = join(ROOT, rel);
     mkdirSync(dir, { recursive: true });
