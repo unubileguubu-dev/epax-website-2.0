@@ -74,10 +74,15 @@ const DESC = {
     'Гэст хаусад зориулсан EPAX — жижиг багт зориулсан шинэлэг профайл, шуурхай хариулт.'],
 };
 const MN_BLOG_DESC = 'EPAX блог — Монголын зочлох үйлчилгээн дэх AI ба бодит туршлага.';
+const BLOG_META = {};
 for (const slug of BLOG_SLUGS) {
   const md = readFileSync(join(ROOT, 'assets/blog-posts', slug + '.md'), 'utf8');
   const lede = md.split(/^---$/m)[2].trim().split(/\n\s*\n/)[0].replace(/\s+/g, ' ').slice(0, 155);
   DESC['/blog/' + slug] = [lede, MN_BLOG_DESC];
+  BLOG_META[slug] = {
+    date: (md.match(/^date: (\S+)/m) || [])[1] || '',
+    image: (md.match(/^articleImage: (\S+)/m) || [])[1] || '',
+  };
 }
 
 /* sanity: the shell must reference assets that exist on disk */
@@ -88,14 +93,26 @@ for (const m of shell.matchAll(/(?:src|href)="(main-[A-Z0-9]+\.js|styles-[A-Z0-9
 
 const browser = await puppeteer.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: 'new' });
 
-function headSurgery(html, route, lang) {
+function ogImage(route) {
+  if (route.startsWith('/blog')) return 'sitecard-blog.png';
+  if (route === '/pricing') return 'sitecard-plans-and-pricing.png';
+  if (route.startsWith('/use-cases')) return 'sitecard-use-cases.png';
+  return 'sitecard-default.png';
+}
+
+function headSurgery(html, route, lang, h1) {
   const [en, mn] = DESC[route] || DESC['/'];
   const desc = (lang === 'mn' ? mn : en).replace(/"/g, '&quot;');
   const enUrl = ORIGIN + (route === '/' ? '/' : route);
   const mnUrl = ORIGIN + '/mn' + (route === '/' ? '' : route);
   const self = lang === 'mn' ? mnUrl : enUrl;
 
+  // idempotency: the crawl may be served from a previous run's snapshots,
+  // so strip everything a prior headSurgery injected before re-injecting
   html = html.replace(/\s*<meta name="robots" content="noindex">/, '');
+  html = html.replace(/<link rel="alternate" hreflang="[^"]*" href="[^"]*">/g, '');
+  html = html.replace(/<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"BlogPosting"[\s\S]*?<\/script>/g, '');
+  html = html.replace(/<script>try\{localStorage\.setItem\('epax-lang'[\s\S]*?<\/script>/g, '');
   html = html.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${desc}">`);
   html = html.replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${desc}">`);
   html = html.replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${desc}">`);
@@ -104,6 +121,23 @@ function headSurgery(html, route, lang) {
     `<link rel="alternate" hreflang="en" href="${enUrl}">` +
     `<link rel="alternate" hreflang="mn" href="${mnUrl}">` +
     `<link rel="alternate" hreflang="x-default" href="${enUrl}">`);
+  const img = `${ORIGIN}/assets/image/sitecards/${ogImage(route)}`;
+  html = html.replace(/<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${img}">`);
+  html = html.replace(/<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${img}">`);
+  const slug = route.startsWith('/blog/') ? route.slice(6) : null;
+  if (slug && BLOG_META[slug]) {
+    const meta = BLOG_META[slug];
+    const ld = {
+      '@context': 'https://schema.org', '@type': 'BlogPosting',
+      headline: h1 || slug, description: lang === 'mn' ? mn : en,
+      datePublished: meta.date, dateModified: meta.date,
+      image: meta.image ? `${ORIGIN}/assets/image/${meta.image}` : img,
+      inLanguage: lang, mainEntityOfPage: self,
+      author: { '@type': 'Organization', name: 'EPAX', url: ORIGIN },
+      publisher: { '@type': 'Organization', name: 'EPAX', url: ORIGIN },
+    };
+    html = html.replace('</head>', `<script type="application/ld+json">${JSON.stringify(ld)}</script></head>`);
+  }
   if (lang === 'mn') {
     // hand off to the SPA: persist the language and restore the EN route
     // BEFORE any app script runs, so the Angular router never sees /mn/*
@@ -122,14 +156,17 @@ for (const lang of ['en', 'mn']) {
     else await page.evaluateOnNewDocument(() => localStorage.removeItem('epax-lang'));
     await page.goto(BASE + route, { waitUntil: 'networkidle2', timeout: 60000 });
     await new Promise(r => setTimeout(r, 5000));
-    let html = await page.evaluate(() => {
+    let { html, h1 } = await page.evaluate(() => {
       // strip injected widgets whose event listeners can't serialize —
       // their runtime injectors re-create them on load
       document.getElementById('epaxLangTg')?.remove();
       document.getElementById('epaxAuditForm')?.remove();
-      return '<!doctype html>' + document.documentElement.outerHTML;
+      return {
+        html: '<!doctype html>' + document.documentElement.outerHTML,
+        h1: (document.querySelector('h1')?.textContent || '').replace(/\s+/g, ' ').trim(),
+      };
     });
-    html = headSurgery(html, route, lang);
+    html = headSurgery(html, route, lang, h1);
     const rel = (lang === 'mn' ? 'mn' + (route === '/' ? '' : route) : route === '/' ? '.' : route.slice(1));
     const dir = join(ROOT, rel);
     mkdirSync(dir, { recursive: true });
