@@ -85,7 +85,7 @@ if (oldestSnap < shellMtime) warn('shell.html is newer than some snapshots — r
 console.log('sitemap');
 const sm = read('sitemap.xml');
 const locs = (sm.match(/<loc>/g) || []).length;
-if (locs !== routes.length * 2 + 1) fail(`sitemap has ${locs} URLs, expected ${routes.length * 2 + 1}`);
+if (locs !== routes.length * 2 + 2) fail(`sitemap has ${locs} URLs, expected ${routes.length * 2 + 2}`);
 else ok(`${locs} URLs`);
 
 /* ---------- 5. vercel config ---------- */

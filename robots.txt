@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://epax.mn/sitemap.xml
+Sitemap: https://www.epax.mn/sitemap.xml

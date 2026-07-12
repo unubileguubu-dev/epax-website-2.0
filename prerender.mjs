@@ -15,7 +15,7 @@ const puppeteer = require('puppeteer-core');
 
 const ROOT = dirname(new URL(import.meta.url).pathname);
 const BASE = 'http://localhost:3000';
-const ORIGIN = 'https://epax.mn';
+const ORIGIN = 'https://www.epax.mn';
 
 const BLOG_SLUGS = ['google-io-2026', 'introducing-epax-2', 'epax-built-an-os', 'introducing-epax-cli',
   'introducing-epax-sdk', 'epax-for-enterprises', 'ai-3-5-flash-in-epax', 'introducing-epax'];
@@ -201,6 +201,7 @@ for (const route of ROUTES) {
   urls.push(`  <url>\n    <loc>${mnUrl}</loc>${alts}\n    <lastmod>${today}</lastmod>\n  </url>`);
 }
 urls.push(`  <url>\n    <loc>${ORIGIN}/shop/</loc>\n    <lastmod>${today}</lastmod>\n  </url>`);
+urls.push(`  <url>\n    <loc>${ORIGIN}/faq/</loc>\n    <lastmod>${today}</lastmod>\n  </url>`);
 writeFileSync(join(ROOT, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`);
 console.log(`sitemap.xml: ${urls.length} URLs`);
