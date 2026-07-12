@@ -1,7 +1,7 @@
 # EPAX Website — Maintenance Handbook
 
 **Read this before changing anything.** (Setup for a new model/machine and the future-work roadmap: see `HANDOFF.md`.) This file is the durable memory of how this
-site works, written for whichever человек or AI model maintains it next.
+site works, written for whichever human or AI model maintains it next.
 Production: **https://epax.mn** — Vercel, auto-deploys from GitHub
 `unubileguubu-dev/epax-website-2.0`, branch `main`. Every push goes live in ~1 minute.
 
