@@ -40,7 +40,7 @@ createServer(async (req, res) => {
       const si = await stat(idx).catch(() => null);
       if (si) { file = idx; s = si; }
       else {
-        file = join(ROOT, 'index.html');
+        file = join(ROOT, 'shell.html');
         s = await stat(file).catch(() => null);
       }
     } else if (!s) {
@@ -53,7 +53,7 @@ createServer(async (req, res) => {
       // SPA fallback: Angular router handles the path client-side.
       // Re-stat so the gzip cache sees index.html's real mtime — otherwise
       // fallback routes serve a stale cached copy after index.html changes.
-      file = join(ROOT, 'index.html');
+      file = join(ROOT, 'shell.html');
       s = await stat(file).catch(() => null);
     }
 
