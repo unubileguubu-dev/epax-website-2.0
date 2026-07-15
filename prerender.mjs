@@ -17,7 +17,7 @@ const ROOT = dirname(new URL(import.meta.url).pathname);
 const BASE = 'http://localhost:3000';
 const ORIGIN = 'https://www.epax.mn';
 
-const BLOG_SLUGS = ['google-io-2026', 'introducing-epax-2', 'epax-built-an-os', 'introducing-epax-cli',
+const BLOG_SLUGS = ['google-maps-guide', 'hotel-occupancy-mongolia', 'google-io-2026', 'introducing-epax-2', 'epax-built-an-os', 'introducing-epax-cli',
   'introducing-epax-sdk', 'epax-for-enterprises', 'ai-3-5-flash-in-epax', 'introducing-epax'];
 
 const ROUTES = ['/', '/pricing', '/blog', '/use-cases', '/product', '/download',

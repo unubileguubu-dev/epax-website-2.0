@@ -48,7 +48,7 @@ console.log('snapshots');
 const routes = ['', 'pricing', 'blog', 'use-cases', 'product', 'download',
   'product/epax-2', 'product/epax-cli', 'product/epax-sdk', 'product/epax-ide',
   'use-cases/fullstack', 'use-cases/frontend', 'use-cases/enterprise', 'use-cases/science', 'use-cases/marketer',
-  ...['google-io-2026', 'introducing-epax-2', 'epax-built-an-os', 'introducing-epax-cli',
+  ...['google-maps-guide', 'hotel-occupancy-mongolia', 'google-io-2026', 'introducing-epax-2', 'epax-built-an-os', 'introducing-epax-cli',
       'introducing-epax-sdk', 'epax-for-enterprises', 'ai-3-5-flash-in-epax', 'introducing-epax'].map(s => 'blog/' + s)];
 let snapProblems = 0;
 const shellMtime = statSync(join(ROOT, 'shell.html')).mtimeMs;
