@@ -6,7 +6,7 @@ author: The EPAX Team
 authorTitle: 
 date: 2026-07-02T09:00:00.000Z
 title: Why Mongolian hotels sit at 30% occupancy — and what actually fixes it
-articleImage: blog/epax-story-growth.jpg
+articleImage: blog/epax-story-occupancy.jpg
 ---
 
 Mongolia welcomed over 800,000 foreign tourists last year, yet the average hotel outside the capital runs near 30% occupancy — and even Ulaanbaatar properties leave rooms empty in peak season. After auditing dozens of properties, we can say the pattern plainly: this is rarely a product problem. The rooms are fine. It is a visibility problem, and it has a structure.

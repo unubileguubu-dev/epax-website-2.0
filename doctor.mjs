@@ -48,7 +48,7 @@ console.log('snapshots');
 const routes = ['', 'pricing', 'blog', 'use-cases', 'product', 'download',
   'product/epax-2', 'product/epax-cli', 'product/epax-sdk', 'product/epax-ide',
   'use-cases/fullstack', 'use-cases/frontend', 'use-cases/enterprise', 'use-cases/science', 'use-cases/marketer',
-  ...['google-maps-guide', 'hotel-occupancy-mongolia', 'google-io-2026', 'introducing-epax-2', 'epax-built-an-os', 'introducing-epax-cli',
+  ...['ger-camp-bookings', 'google-maps-guide', 'hotel-occupancy-mongolia', 'google-io-2026', 'introducing-epax-2', 'epax-built-an-os', 'introducing-epax-cli',
       'introducing-epax-sdk', 'epax-for-enterprises', 'ai-3-5-flash-in-epax', 'introducing-epax'].map(s => 'blog/' + s)];
 let snapProblems = 0;
 const shellMtime = statSync(join(ROOT, 'shell.html')).mtimeMs;
@@ -85,7 +85,7 @@ if (oldestSnap < shellMtime) warn('shell.html is newer than some snapshots — r
 console.log('sitemap');
 const sm = read('sitemap.xml');
 const locs = (sm.match(/<loc>/g) || []).length;
-if (locs !== routes.length * 2 + 2) fail(`sitemap has ${locs} URLs, expected ${routes.length * 2 + 2}`);
+if (locs !== routes.length * 2 + 4) fail(`sitemap has ${locs} URLs, expected ${routes.length * 2 + 4}`);
 else ok(`${locs} URLs`);
 
 /* ---------- 5. vercel config ---------- */

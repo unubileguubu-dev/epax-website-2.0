@@ -6,7 +6,7 @@ author: The EPAX Team
 authorTitle: 
 date: 2026-07-09T09:00:00.000Z
 title: Getting your hotel found on Google Maps — an owner's guide
-articleImage: blog/epax-story-booked.jpg
+articleImage: blog/epax-story-mapsguide.jpg
 ---
 
 When a foreign tourist plans a night in your town, the search almost always starts in one place: Google Maps. Not your website, not a brochure — the map. If your property is missing, half-filled, or only in Mongolian, you are invisible at the exact moment a booking is decided. Here is the checklist we run for every EPAX client, written so you can do the basics yourself.

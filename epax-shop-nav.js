@@ -54,7 +54,26 @@
     if (shop && shop.parentNode) shop.parentNode.insertBefore(makeFaq(faqId), shop.nextSibling);
   }
 
+  function ensureFooterLegal() {
+    if (document.getElementById('epaxLegalRow')) return;
+    var host = document.querySelector('app-footer .footer-google-links .grid-row') ||
+               document.querySelector('app-footer footer');
+    if (!host) return;
+    var span = document.createElement('span');
+    span.id = 'epaxLegalRow';
+    span.style.cssText = 'display:inline-flex;gap:18px;align-items:center';
+    [['/terms/', 'Terms'], ['/privacy/', 'Privacy']].forEach(function (l) {
+      var a = document.createElement('a');
+      a.href = l[0]; a.textContent = l[1];
+      a.className = 'epax-shop-link';
+      a.style.cssText = 'font-size:13px;padding:6px 10px';
+      span.appendChild(a);
+    });
+    host.appendChild(span);
+  }
+
   function ensure() {
+    ensureFooterLegal();
     var header = document.querySelector('app-header header');
     if (!header) return;
     place(header, 'epaxShopNav');
