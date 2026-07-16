@@ -96,10 +96,21 @@ const SHELL_V = (shell.match(/epax-i18n\.js\?v=(\d+)/) || [])[1];
 
 /* the crawl may be served from snapshots of an OLDER shell — rewrite any
    stale fingerprint/version references to the current ones */
+const SHELL_FONT_LINKS = [...shell.matchAll(/<link[^>]*fonts\.googleapis\.com\/css2\?family=(?!Google\+Symbols)[^>]*>/g)]
+  .map(m => m[0]).join('\n  ');
 function normalizeAssets(html) {
   html = html.replace(/main-[A-Z0-9]+\.js/g, SHELL_BUNDLE);
   html = html.replace(/styles-[A-Z0-9]+\.css/g, SHELL_STYLES);
   html = html.replace(/(epax-[a-z0-9-]+\.js\?v=)\d+/g, `$1${SHELL_V}`);
+  /* text-font links must match the shell (Symbols untouched): drop whatever
+     css2 family links + inline @font-face blocks the old snapshot carried,
+     then re-insert the shell's links after the fonts.gstatic preconnect */
+  html = html.replace(/\s*<link[^>]*fonts\.googleapis\.com\/css2\?family=(?!Google\+Symbols)[^>]*>/g, '');
+  html = html.replace(/\s*<style>@font-face\{font-family:'Google Sans Flex'[\s\S]*?<\/style>/g, '');
+  if (SHELL_FONT_LINKS && !html.includes(SHELL_FONT_LINKS.split('\n')[0])) {
+    html = html.replace(/(<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com"[^>]*>)/,
+      `$1\n  ${SHELL_FONT_LINKS}`);
+  }
   return html;
 }
 

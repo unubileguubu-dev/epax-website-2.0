@@ -114,6 +114,12 @@ categories, author, date, title, articleImage), add the card to `a7` and
 
 - Vercel's bot protection challenges rapid headless crawls — audit against
   `localhost:3000`, not production.
+- Snapshots inherit their `<head>` from the *previous* snapshot generation, not
+  from shell.html (the crawl is served old snapshots). Bundle/styles/`?v=` refs
+  and text-font `<link>`s are normalized by `normalizeAssets()` in prerender.mjs
+  (2026-07-16, Heritage retheme incident: new font links silently missing from
+  all 50 snapshots). Any OTHER head change to shell.html needs its own
+  normalization rule there — grep the regenerated index.html to confirm it took.
 - `hero_video.mp4` / `epax-loop.mp4` are already optimally encoded — recompressing
   makes them **larger**. Dash-Gradient/logo-blue were compressed 2026-07-11.
 - The Google Symbols icon font renders ligature names as text for a beat before
