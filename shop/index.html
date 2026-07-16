@@ -88,6 +88,7 @@
 
   .media{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--hairline)}
   .media svg{width:80%;height:auto}
+  .media .m-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .m-gold{background:radial-gradient(120% 100% at 50% 0%,#f8f2e2,#efe6cc)}
   .m-navy{background:radial-gradient(120% 100% at 50% 0%,#eef2f7,#dbe3ee)}
   .m-black{background:radial-gradient(120% 100% at 50% 0%,#ececef,#dcdce1)}
@@ -363,10 +364,10 @@
       colors: ['gold', 'navy', 'black'] },
     { kind: 'polo', name: 'Club Polo', price: '$48',
       desc: 'Breathable piqué polo with a small EPAX arch at the chest — front-desk ready.',
-      colors: ['gold', 'navy'] },
+      colors: ['gold', 'navy', 'black'] },
     { kind: 'cap', name: 'Crest Cap', price: '$28',
       desc: 'Six-panel cotton cap with raised EPAX embroidery and an adjustable strap.',
-      colors: ['gold', 'navy'] }
+      colors: ['gold', 'navy', 'black'] }
   ];
 
   var grid = document.getElementById('grid');
@@ -375,9 +376,11 @@
     p.colors.forEach(function (c) {
       var cw = COLORWAYS[c];
       var desc = (c === 'black' && p.blackDesc) ? p.blackDesc : p.desc;
+      var photo = '/assets/image/shop/' + p.kind + '-' + c + '.jpg';
       html +=
         '<article class="card">' +
           '<div class="media ' + cw.cls + '">' + BUILDERS[p.kind]('u' + (uid++), cw) +
+            '<img class="m-photo" loading="lazy" alt="" src="' + photo + '" onerror="this.remove()">' +
             '<span class="stamp">Sold out</span>' +
           '</div>' +
           '<div class="info">' +
