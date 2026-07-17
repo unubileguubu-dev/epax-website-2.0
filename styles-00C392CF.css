@@ -53,5 +53,5 @@ body{
 .special-text{color:#16130C}
 epax-logo::after{color:#042C53;font-family:Fraunces,Georgia,serif;font-weight:560}
 google-logo::after{font-family:Fraunces,Georgia,serif;font-weight:560}
-/* hero brand film: shift baked-in Google blue to heritage gold — pixels only, playback untouched */
-.landing-video{filter:hue-rotate(190deg) saturate(.82)}
+/* hero brand film is color-graded in the asset itself (hero_video_gold.mp4) —
+   never put a CSS filter on a playing video: it froze scrolling on iOS (2026-07-16) */

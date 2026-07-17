@@ -114,6 +114,16 @@ categories, author, date, title, articleImage), add the card to `a7` and
 
 - Vercel's bot protection challenges rapid headless crawls — audit against
   `localhost:3000`, not production.
+- **Never put a CSS `filter` on a playing `<video>`.** The 2026-07-16 Heritage
+  retheme hue-rotated `.landing-video`; on iOS Safari that forces software
+  compositing of every frame, saturating the main thread — and since scrolling
+  on this site is JS-driven (GSAP keeps `body{touch-action:pan-x}` and scrolls
+  in RAF), phones could not scroll AT ALL. Desktop was fine, `doctor --live`
+  was green. Color-grade video assets with ffmpeg (`hue=h=…:s=…`) and rename
+  the file (e.g. hero_video_gold.mp4) so caches can't serve the old one.
+- `body{touch-action:pan-x}` on the homepage is NORMAL (GSAP virtual scroll),
+  and synthetic CDP touch swipes don't move it even on healthy builds — don't
+  use them to judge whether real-device scroll works.
 - Snapshots inherit their `<head>` from the *previous* snapshot generation, not
   from shell.html (the crawl is served old snapshots). Bundle/styles/`?v=` refs
   and text-font `<link>`s are normalized by `normalizeAssets()` in prerender.mjs
