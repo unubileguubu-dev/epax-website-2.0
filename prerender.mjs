@@ -102,6 +102,12 @@ function normalizeAssets(html) {
   html = html.replace(/main-[A-Z0-9]+\.js/g, SHELL_BUNDLE);
   html = html.replace(/styles-[A-Z0-9]+\.css/g, SHELL_STYLES);
   html = html.replace(/(epax-[a-z0-9-]+\.js\?v=)\d+/g, `$1${SHELL_V}`);
+  /* GSAP writes scroll-lock styles (touch-action:pan-x, height, scroll-behavior)
+     onto <html>/<body> at runtime; serializing them ships the page PRE-LOCKED and
+     Angular never resets root attributes on boot → mobile cannot scroll at all.
+     Strip every inline style from the root tags — the shell has none. */
+  html = html.replace(/<html([^>]*?)\s+style="[^"]*"/, '<html$1');
+  html = html.replace(/<body([^>]*?)\s+style="[^"]*"/, '<body$1');
   /* text-font links must match the shell (Symbols untouched): drop whatever
      css2 family links + inline @font-face blocks the old snapshot carried,
      then re-insert the shell's links after the fonts.gstatic preconnect */

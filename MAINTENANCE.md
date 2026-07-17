@@ -114,16 +114,21 @@ categories, author, date, title, articleImage), add the card to `a7` and
 
 - Vercel's bot protection challenges rapid headless crawls — audit against
   `localhost:3000`, not production.
-- **Never put a CSS `filter` on a playing `<video>`.** The 2026-07-16 Heritage
-  retheme hue-rotated `.landing-video`; on iOS Safari that forces software
-  compositing of every frame, saturating the main thread — and since scrolling
-  on this site is JS-driven (GSAP keeps `body{touch-action:pan-x}` and scrolls
-  in RAF), phones could not scroll AT ALL. Desktop was fine, `doctor --live`
-  was green. Color-grade video assets with ffmpeg (`hue=h=…:s=…`) and rename
-  the file (e.g. hero_video_gold.mp4) so caches can't serve the old one.
-- `body{touch-action:pan-x}` on the homepage is NORMAL (GSAP virtual scroll),
-  and synthetic CDP touch swipes don't move it even on healthy builds — don't
-  use them to judge whether real-device scroll works.
+- **THE MOBILE NO-SCROLL INCIDENT (2026-07-16), real root cause:** prerender
+  snapshots serialized GSAP's runtime scroll-lock styles onto the root tags
+  (`<html style="touch-action:pan-x …"><body style="height:…;touch-action:pan-x">`).
+  Angular re-renders body *contents* on boot but never resets root attributes,
+  so every snapshot-served page shipped pre-locked: desktop wheel worked, touch
+  was completely dead. Shipped in the first prerender commit (dc1a221) and went
+  unnoticed for days because `doctor --live` never touch-scrolled. Fixed by
+  stripping root `style=""` in prerender's `normalizeAssets()`; doctor now fails
+  any snapshot with `touch-action` on a root tag. Debug method that found it:
+  CDP `Input.synthesizeScrollGesture` (NOT hand-rolled touch dispatches — those
+  fail even on healthy builds), with antigravity.google as a working control
+  and `git worktree` bisect.
+- Also from that hunt: avoid CSS `filter` on a playing `<video>` (iOS software-
+  compositing risk). The hero film's gold grade is baked into
+  `hero_video_gold.mp4` via ffmpeg `hue=h=190:s=0.85` instead.
 - Snapshots inherit their `<head>` from the *previous* snapshot generation, not
   from shell.html (the crawl is served old snapshots). Bundle/styles/`?v=` refs
   and text-font `<link>`s are normalized by `normalizeAssets()` in prerender.mjs

@@ -66,6 +66,9 @@ for (const lang of ['', 'mn/']) {
       noindex: /content="noindex"/.test(h),
       bundleRef: h.includes(bundle) && h.includes(styles),
       handoff: (h.match(/epax-lang','mn'/g) || []).length,
+      // GSAP runtime styles serialized onto root tags ship the page pre-locked
+      // (touch-action:pan-x) and kill ALL mobile scrolling — 2026-07-16 incident
+      rootLock: /<(?:html|body)[^>]*style="[^"]*touch-action/.test(h),
     };
     const bad = [];
     if (c.canonical !== 1) bad.push(`canonical×${c.canonical}`);
@@ -75,6 +78,7 @@ for (const lang of ['', 'mn/']) {
     if (c.noindex) bad.push('noindex leaked into snapshot');
     if (!c.bundleRef) bad.push('references a different bundle than shell');
     if (lang && c.handoff !== 1) bad.push(`mn handoff×${c.handoff}`);
+    if (c.rootLock) bad.push('GSAP scroll-lock styles on <html>/<body> (mobile cannot scroll)');
     if (bad.length) { fail(`${lang}${r || '/'}: ${bad.join(', ')}`); snapProblems++; }
   }
 }
