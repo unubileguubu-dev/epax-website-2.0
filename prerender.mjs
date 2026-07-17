@@ -1,7 +1,7 @@
-// Pre-renders every customer-facing route to static HTML — EN at its own
-// path, MN under /mn/<route> — so search engines and link previews see real
-// content instead of an empty SPA shell. Also regenerates sitemap.xml with
-// hreflang pairs.
+// Pre-renders every customer-facing route to static HTML — MN (the site's
+// default language) at its own path, EN under /en/<route> — so search engines
+// and link previews see real content instead of an empty SPA shell. Also
+// regenerates sitemap.xml with hreflang pairs.
 //
 // RUN THIS (and commit the output) after ANY change to the bundle, styles,
 // helper scripts, or content:   node serve.mjs &   node prerender.mjs
@@ -132,8 +132,8 @@ function ogImage(route) {
 function headSurgery(html, route, lang, h1) {
   const [en, mn] = DESC[route] || DESC['/'];
   const desc = (lang === 'mn' ? mn : en).replace(/"/g, '&quot;');
-  const enUrl = ORIGIN + (route === '/' ? '/' : route);
-  const mnUrl = ORIGIN + '/mn' + (route === '/' ? '' : route);
+  const mnUrl = ORIGIN + (route === '/' ? '/' : route);
+  const enUrl = ORIGIN + '/en' + (route === '/' ? '' : route);
   const self = lang === 'mn' ? mnUrl : enUrl;
 
   // idempotency: the crawl may be served from a previous run's snapshots,
@@ -149,7 +149,7 @@ function headSurgery(html, route, lang, h1) {
   html = html.replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${self}">` +
     `<link rel="alternate" hreflang="en" href="${enUrl}">` +
     `<link rel="alternate" hreflang="mn" href="${mnUrl}">` +
-    `<link rel="alternate" hreflang="x-default" href="${enUrl}">`);
+    `<link rel="alternate" hreflang="x-default" href="${mnUrl}">`);
   const img = `${ORIGIN}/assets/image/sitecards/${ogImage(route)}`;
   html = html.replace(/<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${img}">`);
   html = html.replace(/<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${img}">`);
@@ -167,10 +167,10 @@ function headSurgery(html, route, lang, h1) {
     };
     html = html.replace('</head>', `<script type="application/ld+json">${JSON.stringify(ld)}</script></head>`);
   }
-  if (lang === 'mn') {
-    // hand off to the SPA: persist the language and restore the EN route
-    // BEFORE any app script runs, so the Angular router never sees /mn/*
-    const handoff = `<script>try{localStorage.setItem('epax-lang','mn')}catch(e){};` +
+  if (lang === 'en') {
+    // hand off to the SPA: persist the language and restore the root route
+    // BEFORE any app script runs, so the Angular router never sees /en/*
+    const handoff = `<script>try{localStorage.setItem('epax-lang','en')}catch(e){};` +
       `history.replaceState(null,'',${JSON.stringify(route)});</script>`;
     html = html.replace('<script', handoff + '<script');
   }
@@ -182,7 +182,7 @@ for (const lang of ['en', 'mn']) {
     const page = await browser.newPage();
     await page.setViewport({ width: 1440, height: 900 });
     if (lang === 'mn') await page.evaluateOnNewDocument(() => localStorage.setItem('epax-lang', 'mn'));
-    else await page.evaluateOnNewDocument(() => localStorage.removeItem('epax-lang'));
+    else await page.evaluateOnNewDocument(() => localStorage.setItem('epax-lang', 'en'));
     await page.goto(BASE + route, { waitUntil: 'networkidle2', timeout: 60000 });
     await new Promise(r => setTimeout(r, 5000));
     let { html, h1 } = await page.evaluate(() => {
@@ -190,13 +190,25 @@ for (const lang of ['en', 'mn']) {
       // their runtime injectors re-create them on load
       document.getElementById('epaxLangTg')?.remove();
       document.getElementById('epaxAuditForm')?.remove();
+      // strip helper-injected <style> tags too: they re-inject on every boot,
+      // so serialized copies COMPOUND one generation per regen (11 copies of
+      // the pill CSS were found in a snapshot before this cleanup existed)
+      document.querySelectorAll('style').forEach(s => {
+        if (/epax(LangTg|Team|AuditForm|ShopNav|Ig|FooterLegal)/.test(s.textContent)) s.remove();
+      });
+      // Angular re-adds its component styles on every boot over a snapshot,
+      // so identical <style> blocks also compound — keep first of each
+      const seen = new Set();
+      document.querySelectorAll('style').forEach(s => {
+        if (seen.has(s.textContent)) s.remove(); else seen.add(s.textContent);
+      });
       return {
         html: '<!doctype html>' + document.documentElement.outerHTML,
         h1: (document.querySelector('h1')?.textContent || '').replace(/\s+/g, ' ').trim(),
       };
     });
     html = normalizeAssets(headSurgery(html, route, lang, h1));
-    const rel = (lang === 'mn' ? 'mn' + (route === '/' ? '' : route) : route === '/' ? '.' : route.slice(1));
+    const rel = (lang === 'en' ? 'en' + (route === '/' ? '' : route) : route === '/' ? '.' : route.slice(1));
     const dir = join(ROOT, rel);
     mkdirSync(dir, { recursive: true });
     writeFileSync(join(dir, 'index.html'), html);
@@ -210,12 +222,12 @@ await browser.close();
 const today = new Date().toISOString().slice(0, 10);
 const urls = [];
 for (const route of ROUTES) {
-  const enUrl = ORIGIN + (route === '/' ? '/' : route);
-  const mnUrl = ORIGIN + '/mn' + (route === '/' ? '' : route);
+  const mnUrl = ORIGIN + (route === '/' ? '/' : route);
+  const enUrl = ORIGIN + '/en' + (route === '/' ? '' : route);
   const alts = `\n    <xhtml:link rel="alternate" hreflang="en" href="${enUrl}"/>` +
     `\n    <xhtml:link rel="alternate" hreflang="mn" href="${mnUrl}"/>`;
-  urls.push(`  <url>\n    <loc>${enUrl}</loc>${alts}\n    <lastmod>${today}</lastmod>\n  </url>`);
   urls.push(`  <url>\n    <loc>${mnUrl}</loc>${alts}\n    <lastmod>${today}</lastmod>\n  </url>`);
+  urls.push(`  <url>\n    <loc>${enUrl}</loc>${alts}\n    <lastmod>${today}</lastmod>\n  </url>`);
 }
 urls.push(`  <url>\n    <loc>${ORIGIN}/shop/</loc>\n    <lastmod>${today}</lastmod>\n  </url>`);
 urls.push(`  <url>\n    <loc>${ORIGIN}/faq/</loc>\n    <lastmod>${today}</lastmod>\n  </url>`);

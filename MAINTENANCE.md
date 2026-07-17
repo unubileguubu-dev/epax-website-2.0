@@ -19,7 +19,7 @@ source code**: the app is one minified bundle edited by careful string surgery.
 | `main-<HASH>.js` | The entire compiled Angular app **and all page copy** (pricing, nav, services, use-cases data live inside as JS object literals) |
 | `styles-<HASH>.css` | Global stylesheet + our appended overrides (logo swap, hidden sections, a11y fixes) |
 | `shell.html` | **Source of truth** for the HTML shell: script tags, meta, analytics, error beacon. Serves as SPA fallback for unknown routes (noindex) |
-| `index.html`, `pricing/`, `blog/…`, `mn/…` etc. | **Generated** pre-rendered snapshots — never edit by hand, always regenerate |
+| `index.html`, `pricing/`, `blog/…` (MN), `en/…` (EN) | **Generated** pre-rendered snapshots — never edit by hand, always regenerate |
 | `epax-i18n.js` | EN↔MN translation layer: exact-match dictionary over DOM text nodes + MutationObserver. All Mongolian lives here |
 | `epax-team.js`, `epax-shop-nav.js`, `epax-audit-form.js` | DOM injectors for the team section, Shop nav link, and audit-request form |
 | `assets/blog-posts/*.md` | Blog articles (frontmatter + markdown, fetched client-side; slugs must stay in the bundle's whitelist) |
@@ -65,6 +65,15 @@ edit: fingerprint-rename → update shell.html → prerender → doctor → push
 
 ## 4. The Mongolian layer — rules
 
+- **MN is the site's DEFAULT language (since 2026-07-16).** Root URLs serve MN
+  snapshots; EN lives under `/en/<route>` snapshots whose handoff script stores
+  `epax-lang=en` and `history.replaceState`s back to the root path before the
+  app boots. `epax-i18n.js` defaults to `mn` when no preference is stored; the
+  pill is MN|EN with MN first. Old `/mn/*` URLs 301 to `/*` via vercel.json.
+  hreflang: root=mn (also x-default), `/en/...`=en.
+- The Angular app itself still renders EN natively — MN-by-default works because
+  the i18n layer translates immediately after boot. Every EN string still needs
+  its MN dict entry, same as before.
 - Exact-match on rendered text: the dict key must equal the DOM text after
   whitespace collapse. Curly quotes (’ “ ”) must match exactly; smartypants is OFF.
 - Blocks that get translated must not contain inline links/bold — translation
@@ -129,6 +138,12 @@ categories, author, date, title, articleImage), add the card to `a7` and
 - Also from that hunt: avoid CSS `filter` on a playing `<video>` (iOS software-
   compositing risk). The hero film's gold grade is baked into
   `hero_video_gold.mp4` via ffmpeg `hue=h=190:s=0.85` instead.
+- Snapshot-of-snapshot regeneration COMPOUNDS anything re-injected on boot:
+  helper `<style>` tags and Angular component styles accumulated one copy per
+  regen (282 style tags, 25 unique, in a 758KB homepage before the 2026-07-16
+  cleanup). prerender now strips helper styles and dedupes identical `<style>`
+  blocks before serializing — if snapshot sizes creep up across regens, some
+  new artifact class is compounding; find and add it to the cleanup.
 - Snapshots inherit their `<head>` from the *previous* snapshot generation, not
   from shell.html (the crawl is served old snapshots). Bundle/styles/`?v=` refs
   and text-font `<link>`s are normalized by `normalizeAssets()` in prerender.mjs

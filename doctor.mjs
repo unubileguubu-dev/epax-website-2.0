@@ -53,7 +53,7 @@ const routes = ['', 'pricing', 'blog', 'use-cases', 'product', 'download',
 let snapProblems = 0;
 const shellMtime = statSync(join(ROOT, 'shell.html')).mtimeMs;
 let oldestSnap = Infinity;
-for (const lang of ['', 'mn/']) {
+for (const lang of ['', 'en/']) {
   for (const r of routes) {
     const p = join(ROOT, lang + r, 'index.html');
     if (!existsSync(p)) { fail(`missing snapshot: ${lang}${r || '/'}`); snapProblems++; continue; }
@@ -65,7 +65,7 @@ for (const lang of ['', 'mn/']) {
       blogLd: (h.match(/"BlogPosting"/g) || []).length,
       noindex: /content="noindex"/.test(h),
       bundleRef: h.includes(bundle) && h.includes(styles),
-      handoff: (h.match(/epax-lang','mn'/g) || []).length,
+      handoff: (h.match(/epax-lang','en'/g) || []).length,
       // GSAP runtime styles serialized onto root tags ship the page pre-locked
       // (touch-action:pan-x) and kill ALL mobile scrolling — 2026-07-16 incident
       rootLock: /<(?:html|body)[^>]*style="[^"]*touch-action/.test(h),
@@ -77,7 +77,8 @@ for (const lang of ['', 'mn/']) {
     if (r.startsWith('blog/') && c.blogLd !== 1) bad.push('missing BlogPosting');
     if (c.noindex) bad.push('noindex leaked into snapshot');
     if (!c.bundleRef) bad.push('references a different bundle than shell');
-    if (lang && c.handoff !== 1) bad.push(`mn handoff×${c.handoff}`);
+    if (lang && c.handoff !== 1) bad.push(`en handoff×${c.handoff}`);
+    if (!lang && c.handoff !== 0) bad.push('en handoff leaked into a root (MN) snapshot');
     if (c.rootLock) bad.push('GSAP scroll-lock styles on <html>/<body> (mobile cannot scroll)');
     if (bad.length) { fail(`${lang}${r || '/'}: ${bad.join(', ')}`); snapProblems++; }
   }
@@ -125,7 +126,7 @@ if (process.argv.includes('--live')) {
   const checks = [
     ['/', p => !!p.querySelector('#epaxTeam') && !!p.querySelector('#epaxShopNav') && !!p.querySelector('#epaxLangTg'), 'team+shop+lang widgets'],
     ['/download', p => !!p.querySelector('#epaxAuditForm form'), 'audit form'],
-    ['/mn/pricing', p => location.pathname === '/pricing' && localStorage.getItem('epax-lang') === 'mn', 'mn handoff'],
+    ['/en/pricing', p => location.pathname === '/pricing' && localStorage.getItem('epax-lang') === 'en', 'en handoff'],
   ];
   for (const [route, fn, label] of checks) {
     const page = await browser.newPage();

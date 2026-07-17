@@ -580,8 +580,9 @@
     mn: 'EPAX — Үйл явц бүрд амар амгалан'
   };
 
-  var lang = 'en';
-  try { if (localStorage.getItem('epax-lang') === 'mn') lang = 'mn'; } catch (e) {}
+  /* Mongolian is the site's default language; EN is the opt-in toggle */
+  var lang = 'mn';
+  try { if (localStorage.getItem('epax-lang') === 'en') lang = 'en'; } catch (e) {}
 
   /* typed headlines: let the typing animation type Mongolian natively.
      The compiled typed-header component calls this hook (when present) right
@@ -660,7 +661,7 @@
   var css = document.createElement('style');
   css.textContent =
     '#epaxLangTg{display:inline-flex;align-items:center;gap:2px;border:1px solid rgba(33,34,38,.16);border-radius:999px;padding:3px;background:#fff;margin-right:12px;flex:none}' +
-    '#epaxLangTg button{font-family:"Google Sans Flex","Google Sans",sans-serif;font-size:12px;font-weight:500;letter-spacing:.05em;line-height:1;padding:7px 12px;border-radius:999px;border:none;background:transparent;color:#5f6368;cursor:pointer;transition:background .25s cubic-bezier(.2,.6,.2,1),color .25s cubic-bezier(.2,.6,.2,1)}' +
+    '#epaxLangTg button{font-family:"Public Sans",sans-serif;font-size:12px;font-weight:500;letter-spacing:.05em;line-height:1;padding:7px 12px;border-radius:999px;border:none;background:transparent;color:#5f6368;cursor:pointer;transition:background .25s cubic-bezier(.2,.6,.2,1),color .25s cubic-bezier(.2,.6,.2,1)}' +
     '#epaxLangTg button.on{background:#202124;color:#fff}' +
     '#epaxLangTg button:hover:not(.on){color:#202124;background:rgba(32,33,36,.06)}' +
     '#epaxLangTg button:focus-visible{outline:2px solid #042C53;outline-offset:2px}' +
@@ -674,7 +675,7 @@
     tg.id = 'epaxLangTg';
     tg.setAttribute('role', 'group');
     tg.setAttribute('aria-label', 'Language / Хэл');
-    ['en', 'mn'].forEach(function (l) {
+    ['mn', 'en'].forEach(function (l) {
       var b = document.createElement('button');
       b.type = 'button';
       b.dataset.lang = l;
