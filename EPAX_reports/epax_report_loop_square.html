@@ -1,0 +1,209 @@
+<meta charset="utf-8">
+<title>EPAX — Сарын тайлан · loop (square master)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --navy:#042C53;
+    --gold:#C9A84C;
+    --paper:#FFFFFF;
+    --panel:#F4F5F7;
+    --rule:rgba(4,44,83,.10);
+    --muted:rgba(4,44,83,.42);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#1b1d21;font-family:'Public Sans',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh}
+
+  #frame{position:relative;width:1280px;aspect-ratio:1/1;background:var(--paper);overflow:hidden}
+  #stage{position:absolute;top:0;left:0;width:1200px;height:1200px;transform-origin:top left}
+
+  /* the panel is also the camera subject — it becomes the A4 page.
+     848/1200 = 1:1.415 ≈ A4, so the width-lerp lands on a true page. */
+  .panel{
+    position:absolute;left:0;top:0;width:1200px;height:1200px;
+    background:var(--panel);border-radius:28px;overflow:hidden;
+    transform-origin:top left;
+  }
+
+  .inner{position:absolute;left:96px;top:120px;width:680px}
+
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:17px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .eyebrow .star{color:var(--gold)}
+  h1{font-size:72px;font-weight:500;letter-spacing:-.025em;color:var(--navy);line-height:1;margin-top:16px}
+  .sub{font-size:25px;font-weight:300;color:var(--muted);margin-top:14px}
+
+  .rows{margin-top:54px}
+  .row{display:flex;align-items:baseline;justify-content:space-between;padding:24px 0;border-bottom:1px solid var(--rule)}
+  .label{font-size:22px;font-weight:400;color:var(--navy);opacity:.72}
+  .val{font-size:48px;font-weight:500;color:var(--navy);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .val .arrow{color:var(--gold);font-weight:400;margin:0 10px;font-size:36px}
+  .val .to{color:var(--gold)}
+  .row.ghost .label{font-size:19px;opacity:.34}
+  .row.ghost .val{font-size:28px;opacity:.34;font-weight:400}
+  .underline{height:2px;background:var(--gold);width:0;margin-top:4px}
+
+  #cursor{position:absolute;left:96px;top:130px;width:3px;height:46px;background:var(--gold)}
+
+  /* closing sits on the stage, below the shrunken page */
+  .close{
+    position:absolute;left:0;top:790px;width:1200px;
+    display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 80px;
+  }
+  .mark{width:34px;height:34px;margin-bottom:24px}
+  .closetext{font-size:34px;font-weight:300;line-height:1.34;color:var(--navy);letter-spacing:-.01em}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:22px}
+</style>
+
+<div id="frame">
+  <div id="stage">
+
+    <div class="panel" id="panel">
+      <div id="cursor"></div>
+
+      <div class="inner" id="body">
+        <div class="eyebrow" id="e-eyebrow"><span class="star">✳</span> EPAX</div>
+        <h1 id="e-name">UB Restaurant</h1>
+        <div class="sub" id="e-sub">2026 оны 6-р сарын тайлан</div>
+
+        <div class="rows">
+          <div class="row" data-row>
+            <div class="label">Google Maps дээрх үзэлт</div>
+            <div class="val" data-count="12480"></div>
+          </div>
+          <div class="row" data-row>
+            <div class="label">Рестораны вэб сайтын хандалт</div>
+            <div class="val" data-count="1840"></div>
+          </div>
+          <div class="row" data-row>
+            <div class="label">Ширээний захиалгууд</div>
+            <div class="val" data-count="214"></div>
+          </div>
+          <div class="row" data-row>
+            <div class="label">Зочдын үнэлгээ</div>
+            <div class="val"><span style="opacity:.4">4.2</span><span class="arrow">→</span><span class="to" data-count="4.6" data-dec="1"></span></div>
+          </div>
+          <div class="underline" id="e-ul"></div>
+
+          <div class="row ghost" data-row>
+            <div class="label">Хариулсан хүсэлтүүд</div>
+            <div class="val" data-count="96" data-suffix=" · дундаж 41 мин"></div>
+          </div>
+          <div class="row ghost" data-row>
+            <div class="label">Сошиал сувгуудын хандалт</div>
+            <div class="val" data-count="38000"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="close" id="closing">
+      <!-- real EPAX mark: gold +, navy × -->
+      <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <line x1="8" y1="8" x2="24" y2="24" stroke="#042C53" stroke-width="3.2" stroke-linecap="round"/>
+        <line x1="24" y1="8" x2="8" y2="24" stroke="#042C53" stroke-width="3.2" stroke-linecap="round"/>
+        <line x1="16" y1="4" x2="16" y2="28" stroke="#C9A84C" stroke-width="2.6" stroke-linecap="round"/>
+        <line x1="4" y1="16" x2="28" y2="16" stroke="#C9A84C" stroke-width="2.6" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="closetext">EPAX-ийн хийсэн ажил болон<br>танд авчирсан үр дүн — бүгд энд бий</div>
+        <div class="tag">Peace in every process</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const DUR = 11000;
+
+const frame = document.getElementById('frame'), stage = document.getElementById('stage');
+function fit(){ stage.style.transform = 'scale(' + (frame.clientWidth / 1200) + ')'; }
+new ResizeObserver(fit).observe(frame); fit();
+
+const clamp = (v,a,b) => Math.min(b, Math.max(a,v));
+const easeOut  = t => 1 - Math.pow(1-t, 3);
+const easeInOut= t => t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
+const win  = (t,s,l) => easeOut(clamp((t-s)/l, 0, 1));
+const winIO= (t,s,l) => easeInOut(clamp((t-s)/l, 0, 1));
+const lerp = (a,b,k) => a + (b-a)*k;
+const fmt  = (n,dec) => dec ? n.toFixed(dec) : Math.round(n).toLocaleString('en-US');
+
+const panel   = document.getElementById('panel');
+const cursor  = document.getElementById('cursor');
+const bodyEl  = document.getElementById('body');
+const closing = document.getElementById('closing');
+const ul      = document.getElementById('e-ul');
+const eyebrow = document.getElementById('e-eyebrow');
+const name    = document.getElementById('e-name');
+const sub     = document.getElementById('e-sub');
+const rows    = [...document.querySelectorAll('[data-row]')];
+
+const ROW_T = [2.0, 2.7, 3.4, 4.1, 4.9, 5.3];
+
+/* camera keyframes: full-bleed panel -> A4 page floating upper-centre.
+   panel W 1200->848 with H fixed 1200 keeps a true A4 ratio at rest. */
+const CAM = { s:[1,0.52], dx:[0,380], dy:[0,64], w:[1200,848] };
+
+function setLift(el, p){
+  el.style.opacity = p;
+  el.style.transform = 'translateY(' + ((1-p) * 12) + 'px)';
+}
+
+function render(ms){
+  const t = ms / 1000;
+
+  /* gold cursor — head and tail only; this is where the loop stitches */
+  const alive = (t < 0.9) || (t > 10.35);
+  cursor.style.opacity = alive ? (Math.floor(t*2.2) % 2 ? .15 : 1) : 0;
+
+  /* header */
+  setLift(eyebrow, win(t,0.7,.6));
+  setLift(name,    win(t,0.9,.7));
+  setLift(sub,     win(t,1.2,.7));
+
+  /* rows + counters */
+  rows.forEach((row,i) => {
+    setLift(row, win(t, ROW_T[i], .6));
+    const val = row.querySelector('[data-count]');
+    if(!val) return;
+    const target = parseFloat(val.dataset.count);
+    const dec    = val.dataset.dec ? +val.dataset.dec : 0;
+    const k      = win(t, ROW_T[i] + .1, .75);
+    val.textContent = fmt(target * k, dec) + (val.dataset.suffix && k > .99 ? val.dataset.suffix : '');
+  });
+
+  /* gold underline */
+  ul.style.width = (win(t,5.8,.8) * 640) + 'px';
+
+  /* ---- the camera: pull back to the page, then push back in ---- */
+  const pull = winIO(t, 6.6, 1.4);
+  const push = winIO(t, 9.6, 0.9);
+  const cam  = pull * (1 - push);
+
+  panel.style.width = lerp(CAM.w[0], CAM.w[1], cam) + 'px';
+  panel.style.transform =
+    'translate(' + lerp(CAM.dx[0],CAM.dx[1],cam) + 'px,' + lerp(CAM.dy[0],CAM.dy[1],cam) + 'px)' +
+    ' scale(' + lerp(CAM.s[0],CAM.s[1],cam) + ')';
+  panel.style.boxShadow = '0 ' + (26*cam) + 'px ' + (70*cam) + 'px rgba(4,44,83,' + (0.13*cam) + ')';
+
+  /* the page empties as the camera approaches it */
+  bodyEl.style.opacity = 1 - win(t, 9.6, .7);
+
+  /* closing line, under the page */
+  const cIn  = win(t,8.0,.8);
+  const cOut = win(t,9.4,.6);
+  closing.style.opacity = cIn * (1 - cOut);
+  closing.style.transform = 'translateY(' + ((1-cIn)*10) + 'px)';
+}
+
+window.__render = render;   // deterministic hook for the frame recorder
+
+if (!location.search.includes('record')) {
+  let base = performance.now();
+  (function loop(now){ render((now - base) % DUR); requestAnimationFrame(loop); })(base);
+} else {
+  render(0);
+}
+</script>
